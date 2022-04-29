@@ -1,0 +1,35 @@
+Package: beastr
+Type: Package
+Title: Better Environmental/Animal Sensor/Telemetry Repository
+Version: 0.1.0
+Author: Jon Weissman
+Maintainer: Jon Weissman <jweissma@gmail.com>
+Description: Manage wildlife telemetry data.
+    This package provides the infrastructure needed to manage wildlife telemetry
+    data. There are functions to read in raw data, build a database that 
+    links sensor data to animals, filter bad data, do basic analyses, and export
+    data for use in other applications.
+License: AGPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Depends:
+    methods,
+    R (>= 3.3.0)
+Imports:
+    dplyr,
+    sf (>= 1.0.8),
+    tidyr,
+    knitr,
+    shiny,
+    readxl,
+    lubridate,
+    RSQLite,
+    fs,
+    magrittr,
+    rlang
+Suggests:
+    ggplot2,
+    mapview
+SystemRequirements: C++11, GDAL (>= 2.0.1), GEOS (>= 3.4.0),
+    PROJ (>= 4.8.0), sqlite3
+RoxygenNote: 7.1.2
