@@ -34,7 +34,7 @@ NULL
 #' @param tz timezone string to convert timezone processing
 #'
 #' @examples
-#' points = read_lotek(system.file("lotek/fixes/33452.txt", package="beastr"))
+#' points = read_lotek(system.file("lotek/33452.txt", package="beastr"))
 #' summary(points)
 #'
 #' @importFrom purrr pluck map map_chr map_dbl reduce
@@ -187,3 +187,52 @@ read_lotek_2_sf <- function(filename,
     sf::st_transform(output_crs)
 }
 
+
+#' Read single lotek activity 'csv' with header
+#'
+#' @param filename A path to a single lotek activity text file.
+#' This should point to a lotek activity .csv files, which are
+#' not really true CSVs.
+read_lotek_activity_txt <- function(filename,
+                                    show_col_types = FALSE) {
+
+  # Get header info
+  # first 3 lines are colon delimitted text with
+  # device info
+  readr::read_delim(filename,
+                    delim = ": ",
+                    n_max = 3,
+                    col_names = FALSE,
+                    show_col_types = show_col_types) %>%
+    tidyr::pivot_wider(names_from = X1, values_from = X2) ->
+    header
+
+  # Get activity data
+  # The 5th line of the file onwards is a CSV
+  # (With field names in the 5th line)
+  readr::read_delim(filename,
+                    delim = ",",
+                    skip = 4,
+                    show_col_types = show_col_types) ->
+    data
+
+  data %>%
+    mutate(device_id = header$`Product ID`) %>%
+    select(device_id, everything())
+}
+
+#' Read one or more lotek activity text files
+#'
+#' @param files File paths, either a single file path or a list/vector of
+#' multiple paths. These should point to lotek activity .csv files, which are
+#' not really true CSVs.
+#' @examples
+#' activity_files = system.file("lotek/activity.csv", package="beastr")
+#' activity = read_lotek_activity(activity_files)
+#' @export
+read_lotek_activity <- function(files) {
+  files %>%
+    purrr::map(read_lotek_activity_txt) %>%
+    purrr::reduce(bind_rows) %>%
+    distinct()
+}
