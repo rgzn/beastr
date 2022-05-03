@@ -14,10 +14,11 @@ Encoding: UTF-8
 LazyData: true
 Depends:
     methods,
-    R (>= 3.3.0)
+    R (>= 3.3.0),
 Imports:
     dplyr,
     sf (>= 1.0.8),
+    readr,
     tidyr,
     knitr,
     shiny,
@@ -26,10 +27,14 @@ Imports:
     RSQLite,
     fs,
     magrittr,
-    rlang
+    rlang,
+    purrr,
+    shiny
 Suggests:
     ggplot2,
-    mapview
+    mapview,
+    testthat (>= 3.0.0)
 SystemRequirements: C++11, GDAL (>= 2.0.1), GEOS (>= 3.4.0),
     PROJ (>= 4.8.0), sqlite3
 RoxygenNote: 7.1.2
+Config/testthat/edition: 3

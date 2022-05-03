@@ -1,26 +1,24 @@
-# read.R
+# read_lotek.R
 # Functions to read raw data into R
 
-#' @importFrom rlang .data
+#' @import rlang
 #' @import dplyr
 #' @import sf
 #' @importFrom readr read_fwf
-#' @importFrom purrr pluck map map_chr map_dbl
-#' @importFrom rland .data
+#' @importFrom purrr pluck map map_chr map_dbl reduce
 #' @import lubridate
-#' @importFrom odbc odbc
-#' @importFrom DBI dbConnect dbDisconnect
 #' @importFrom stringr str_detect str_replace_all str_extract
 #' @docType package
 #' @name packagename
 NULL
 
 
-#' Read a Lotek gps txt file into a spatial dataframe.
+#' Read Lotek gps txt files into a spatial dataframe.
 #'
-#' This function takes a fixed-width delimited lotek txt file and turns it
-#' into an sf collection of points. If there are records with the same
-#' !!id_field and
+#' This function takes one or more lotek txt files and turns them
+#' into an sf collection of points. If there are multiple versions
+#' of the same fix record, duplicates will be removed by default.
+#' Only the duplicate from the most recent file is kept.
 #'
 #' @param files Input files. This can be a path to a single file,
 #' a character vector of paths to multiple files, or a list
@@ -28,27 +26,35 @@ NULL
 #'
 #' @param id the device id #. by default this comes from the filename
 #'
-#' @param missed.rm if `TRUE`, remove missed fixes
+#' @param remove_duplicates if `FALSE`, duplicate records are included
+#' in the output
+#'
 #' @param input_crs reference system used for interpreting coords from file
 #' @param output_crs reference system for output spatial df
 #' @param tz timezone string to convert timezone processing
+#'
+#' @examples
+#' points = read_lotek(system.file("lotek/fixes/33452.txt", package="beastr"))
+#' summary(points)
+#'
+#' @importFrom purrr pluck map map_chr map_dbl reduce
+#' @export
 read_lotek <- function(files,
-                       id_field = DeviceID,
                        remove_duplicates = TRUE,
                        ...) {
-  id_field <- enquo(id_field)
+  #id_field <- rlang::enquo(id_field)
   files %>%
-    map(~ read_lotek_2_sf(
+    purrr::map(~ read_lotek_2_sf(
       filename = .x,
-      id_field = !!id_field,
+      # id_field = !!id_field,
       id = NULL
     )) %>%
-    reduce(bind_rows) ->
+    purrr::reduce(bind_rows) ->
   fixes
 
   if (remove_duplicates) {
     fixes %>%
-      group_by(!!id_field, Index) %>%
+      group_by(id, Index) %>%
       arrange(desc(Ingest_Time)) %>%
       filter(row_number() == 1) %>%
       ungroup()
@@ -56,7 +62,7 @@ read_lotek <- function(files,
 }
 
 
-#' Read a Lotek gps txt file into a spatial dataframe.
+#' Read single Lotek gps txt file into a spatial dataframe.
 #'
 #' This function takes a fixed-width delimited lotek txt file and turns it
 #' into an sf collection of points.
@@ -65,22 +71,21 @@ read_lotek <- function(files,
 #' the filename is assumed to be in the standard lotek format, with device id.
 #'
 #'
-#' @param id_field
 #' @param id the device id #. by default this comes from the filename
-#'
-#' @param missed.rm if `TRUE`, remove missed fixes
 #' @param input_crs reference system used for interpreting coords from file
 #' @param output_crs reference system for output spatial df
 #' @param tz timezone string to convert timezone processing
+#'``
+#' @export
 read_lotek_2_sf <- function(filename,
-                            id_field = DeviceID,
+                            #id_field = DeviceID,
                             id = NULL,
                             input_crs = 4326,
                             output_crs = 32611,
                             tz = "UTC",
                             ingest_time = NA) {
 
-  # id_field = enquo(id_field)
+  # id_field = rlang::enquo(id_field)
 
 
   # Get device ID from filename if not given:
@@ -140,7 +145,9 @@ read_lotek_2_sf <- function(filename,
   # Add in device id:
   # Create a column for the individual Collar ID
   df %>%
-    dplyr::mutate(id_field = as.character(id)) ->
+    dplyr::mutate( id = as.character(id)) %>%
+    dplyr::select(id,
+                  everything()) ->
   df
 
   # Add in pinpoint file modification time:
@@ -177,21 +184,6 @@ read_lotek_2_sf <- function(filename,
 
   # Transform to output CRS and return
   df %>%
-    sf::st_transform(output_crs) %>%
-    return()
+    sf::st_transform(output_crs)
 }
 
-#' Read a list of delimited text files that have a unique ID field.
-#' Use this field to pick only distinct entries.
-#'
-#' @param input_files a single filename or a list of filenames. These are
-#' delimited text files that share a column name for the unique identifier
-#' @param id_field column/field name for the unique identifier. Defaults to "ID"
-#'
-read_delims_w_uids <- function(input_files,
-                               id_field = ID) {
-  input_files %>%
-    map(readr::read_delim) %>%
-    reduce(bind_rows) %>%
-    distinct({{ id_field }}, .keep_all = TRUE)
-}
