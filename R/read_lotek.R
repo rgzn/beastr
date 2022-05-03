@@ -195,6 +195,9 @@ read_lotek_2_sf <- function(filename,
 #' not really true CSVs.
 read_lotek_activity_txt <- function(filename,
                                     show_col_types = FALSE) {
+  # see ?readr::parse_datetime or base::strptime
+  datetime_format = "%m/%d/%Y %I:%M:%S %p"
+  gmt_locale = readr::locale(tz = "GMT")
 
   # Get header info
   # first 3 lines are colon delimitted text with
@@ -213,7 +216,12 @@ read_lotek_activity_txt <- function(filename,
   readr::read_delim(filename,
                     delim = ",",
                     skip = 4,
-                    show_col_types = show_col_types) ->
+                    show_col_types = show_col_types) %>%
+    mutate(time = readr::parse_datetime(`GMT Time`,
+                                        format = datetime_format,
+                                        locale = gmt_locale),
+           .keep = "unused") %>%
+    select(time, everything()) ->
     data
 
   data %>%
@@ -222,6 +230,11 @@ read_lotek_activity_txt <- function(filename,
 }
 
 #' Read one or more lotek activity text files
+#'
+#' If the same record is contained in multiple files, duplicates are removed.
+#' This happens when a device has multiple downloads with overlapping timespans.
+#' Note that this data is not spatial, but may be linked to corresponding
+#' spatial data through the `device_id` and `time`.
 #'
 #' @param files File paths, either a single file path or a list/vector of
 #' multiple paths. These should point to lotek activity .csv files, which are
