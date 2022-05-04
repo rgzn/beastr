@@ -21,20 +21,22 @@ Imports:
     readr,
     tidyr,
     knitr,
-    shiny,
-    readxl,
     lubridate,
     RSQLite,
+    DBI,
     fs,
     magrittr,
     rlang,
     purrr,
-    shiny
+    shiny,
+    stringr
 Suggests:
     ggplot2,
     mapview,
+    rmarkdown,
     testthat (>= 3.0.0)
 SystemRequirements: C++11, GDAL (>= 2.0.1), GEOS (>= 3.4.0),
     PROJ (>= 4.8.0), sqlite3
 RoxygenNote: 7.1.2
 Config/testthat/edition: 3
+VignetteBuilder: knitr
