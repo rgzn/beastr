@@ -8,4 +8,11 @@
 \description{
 Manage wildlife telemetry data. This package provides the infrastructure needed to manage wildlife telemetry data. There are functions to read in raw data, build a database that links sensor data to animals, filter bad data, do basic analyses, and export data for use in other applications.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://rgzn.github.io/beastr/}
+}
+
+}
 \keyword{internal}

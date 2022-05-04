@@ -84,7 +84,8 @@ build_database <- function(fix_files,
   fixes %>%
     st_write(dsn,
              layer = "fixes",
-             delete_dsn = delete_dsn)
+             delete_dsn = delete_dsn,
+             )
   devices %>%
     st_write(dsn,
              layer = "devices",
@@ -195,4 +196,65 @@ time > In_Service AND ( time < Out_Service OR Out_Service ISNULL)"
                  view_geometry_columns)
 
   DBI::dbDisconnect(con)
+}
+
+#' Add new records to existing database
+#'
+#' @inheritParams build_database
+#' @return [append_database()] returns `TRUE`, invisibly.
+#' @import rlang
+#' @import dplyr
+#' @export
+append_database <- function(dsn,
+                            fix_files = NULL,
+                            device_files = NULL,
+                            animal_files = NULL,
+                            deployment_files = NULL) {
+
+  if(!is_null(device_files)) {
+    read_delims_w_uids(device_files, id_field = ID) %>%
+      append_layer(dsn = dsn, layer = "devices")
+  }
+  if(!is_null(animal_files)) {
+    read_delims_w_uids(animal_files, id_field = ID) %>%
+      append_layer(dsn = dsn, layer = "animals")
+  }
+  if(!is_null(deployment_files)) {
+
+      append_layer(dsn = dsn, layer = "devices")
+  }
+  if(!is_null(fix_files)){
+    read_lotek(fix_files) %>%
+      append_layer(dsn = dsn, layer = "fixes")
+  }
+
+}
+
+#' Insert rows into a spatial database
+#'
+#' The `append_layer()` method assumes the data source already has a layer
+#' of the same format as the new data. This can work with either spatial or
+#' non-spatial data. It use `sf::st_write()` instead of `DBI::dbAppendTable()`
+#' in order to handle spatial data.
+#' @param data a tibble or data frame to write to the database. The column names
+#' must be consistent with those in the target layer.
+#' @param dsn data source name. Typically a path to a geopackage.
+#' @param layer layer name to append.
+#' @importFrom dplyr anti_join
+#' @importFrom sf st_read st_write
+#' @export
+append_layer <- function(data,
+                         dsn,
+                         layer) {
+  old_data = sf::st_read(dsn,
+                         layer = layer,
+                         as_tibble = TRUE)
+  data %>%
+    dplyr::anti_join(old_data) ->
+    new_data
+
+  sf::st_write(new_data,
+               dsn = dsn,
+               layer = layer,
+               append = TRUE)
 }
