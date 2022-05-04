@@ -1,12 +1,12 @@
-# build_database.R
+# database.R
 #
 # reads input data and creates a spatial database
 
 
 
 
-#' Construct geopackage sqlite database from scratch
-#' This takes input files describing animals, devices,
+#' Construct geopackage sqlite database from raw data
+#' @details This takes input files describing animals, devices,
 #' deployments, and the data files, and constructs a geopackage
 #' @param fix_files A path, or paths, to files with telemetry fixes.
 #' @param device_files A path, or paths, to CSV files containing information
@@ -45,6 +45,7 @@
 #' @import sf
 #' @importFrom readr locale
 #' @importFrom DBI dbConnect dbExecute dbDisconnect dbWriteTable
+#'
 #' @export
 build_database <- function(fix_files,
                            device_files,
