@@ -31,13 +31,37 @@ Build your database:
 
 ``` r
 library(beastr)
-## basic example code
+library(sf)
+
+# Use example source data
+fix_file = system.file("inst/lotek/33452.txt", package = "beastr")
+device_file = system.file("inst/deployment/devices.csv", package = "beastr")
+animal_file = system.file("inst/deployment/animals.csv", package = "beastr")
+deploy_file = system.file("inst/deployment/deployments.csv", package = "beastr")
+myDB = paste0(tempdir(check = TRUE), "/", "example.gpkg")
+
+# Build a database
+build_database(fix_files = fix_file,
+               device_files = device_file,
+               animal_files = animal_file,
+               deployment_files = deploy_file,
+               dsn = myDB,
+               tz = "US/Pacific")
+
+# What layers are in there?
+sf::st_layers(myDB)
 ```
 
 View data linked to animals, rather than sensors:
 
 ``` r
-#summary(cars)
+library(dplyr)
+
+points = sf::st_read(myDB, layer = "animal_fixes")
+
+points %>% 
+  ggplot2::ggplot() + 
+  ggplot2::geom_sf(ggplot2::aes(fill = animal_id))
 ```
 
 ## Related Projects
