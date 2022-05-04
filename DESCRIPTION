@@ -33,6 +33,7 @@ Imports:
 Suggests:
     ggplot2,
     mapview,
+    leafem,
     rmarkdown,
     testthat (>= 3.0.0)
 SystemRequirements: C++11, GDAL (>= 2.0.1), GEOS (>= 3.4.0),
