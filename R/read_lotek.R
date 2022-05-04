@@ -54,7 +54,7 @@ read_lotek <- function(files,
 
   if (remove_duplicates) {
     fixes %>%
-      group_by(id, Index) %>%
+      group_by(device_id, Index) %>%
       arrange(desc(Ingest_Time)) %>%
       filter(row_number() == 1) %>%
       ungroup()
@@ -145,8 +145,8 @@ read_lotek_2_sf <- function(filename,
   # Add in device id:
   # Create a column for the individual Collar ID
   df %>%
-    dplyr::mutate( id = as.character(id)) %>%
-    dplyr::select(id,
+    dplyr::mutate(device_id = as.character(id)) %>%
+    dplyr::select(device_id,
                   everything()) ->
   df
 
