@@ -2,15 +2,50 @@
 #
 # reads input data and creates a spatial database
 
+
+
+
+#' Construct geopackage sqlite database from scratch
+#' This takes input files describing animals, devices,
+#' deployments, and the data files, and constructs a geopackage
+#' @param fix_files A path, or paths, to files with telemetry fixes.
+#' @param device_files A path, or paths, to CSV files containing information
+#' about the telemetry devices used. This must include an `ID` column.
+#' @param animal_files A path, or paths, to CSV files containing information
+#' about the animals on which devices were deployed. This must include an `ID`
+#' column.
+#' @param deployment_files A path, or paths, to CSV files specifying which
+#' devices were deployed on which animals and when. Columns must include:
+#' `AnimalID`, `DeviceID`, `In_Service`, and `Out_Service`.
+#' @param dsn The path to the database file to be created. Currently must be
+#' a .gpkg file.
+#' @param delete_dsn If TRUE, remove existing dsn.
+#' @param locale Specify time zone using locale object. See [readr::locale()]
+#' @param tz Specify time zone using known character string. ie "US/Pacific"
+#' @return [build_database()] returns `TRUE`, invisibly.
+#'
+#' @examples
+#' \dontrun{
+#'  fix_file = system.file("inst/lotek/33452.txt", package = "beastr")
+#'  device_file = system.file("inst/deployment/devices.csv", package = "beastr")
+#'  animal_file = system.file("inst/deployment/animals.csv", package = "beastr")
+#'  deploy_file = system.file("inst/deployment/deployments.csv", package = "beastr")
+#'  myDB = paste0(tempdir(check = TRUE), "/", "example.gpkg")
+#'  myDB = normalizePath(myDB) # windows?
+#'  build_database(fix_files = fix_file,
+#'  device_files = device_file,
+#'  animal_files = animal_file,
+#'  deployment_files = deploy_file,
+#'  dsn = myDB,
+#'  tz = "US/Pacific")
+#'  sf::st_layers(myDB)
+#' }
 #' @import rlang
 #' @import dplyr
 #' @import sf
 #' @importFrom readr locale
-
-
-# Construct geopackage sqlite database from scratch
-# This takes input files describing animals, devices,
-# deployments, and the data files, and constructs a geopackage from them
+#' @importFrom DBI dbConnect dbExecute dbDisconnect dbWriteTable
+#' @export
 build_database <- function(fix_files,
                            device_files,
                            animal_files,
@@ -18,8 +53,7 @@ build_database <- function(fix_files,
                            dsn = "~/beastr_db.gpkg",
                            delete_dsn = TRUE,
                            locale = NULL,
-                           tz = NULL,
-                           ...) {
+                           tz = NULL) {
   # Set timezone/locale for reading in date time strings
   # NOTE: this does not change the locale in `read_lotek_2_sf`
   # which is always UTC
@@ -40,8 +74,8 @@ build_database <- function(fix_files,
 
   #Read in deployment files
   deployment_files %>%
-    map( ~ readr::read_delim(.x, locale = locale)) %>%
-    reduce(bind_rows) %>%
+    purrr::map( ~ readr::read_delim(.x, locale = locale)) %>%
+    purrr::reduce(bind_rows) %>%
     distinct() ->
     deployments
 
