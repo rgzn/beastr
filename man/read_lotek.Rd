@@ -4,19 +4,21 @@
 \alias{read_lotek}
 \title{Read Lotek gps txt files into a spatial dataframe.}
 \usage{
-read_lotek(files, remove_duplicates = TRUE, show_col_types = FALSE)
+read_lotek(files, ids = NULL, remove_duplicates = TRUE, show_col_types = FALSE)
 }
 \arguments{
 \item{files}{Input files. This can be a path to a single file,
 a character vector of paths to multiple files, or a list
 of paths to multiple files.}
 
+\item{ids}{the device id #s. by default this comes from the filename.
+Note that shiny file input will change filenames, so this field must be used
+in that case.}
+
 \item{remove_duplicates}{if `FALSE`, duplicate records are included
 in the output}
 
 \item{show_col_types}{Passed to readr functions. Useful for debugging.}
-
-\item{id}{the device id #. by default this comes from the filename}
 
 \item{input_crs}{reference system used for interpreting coords from file}
 

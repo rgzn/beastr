@@ -24,7 +24,9 @@ NULL
 #' a character vector of paths to multiple files, or a list
 #' of paths to multiple files.
 #'
-#' @param id the device id #. by default this comes from the filename
+#' @param ids the device id #s. by default this comes from the filename.
+#' Note that shiny file input will change filenames, so this field must be used
+#' in that case.
 #'
 #' @param remove_duplicates if `FALSE`, duplicate records are included
 #' in the output
@@ -41,19 +43,28 @@ NULL
 #' @importFrom purrr pluck map map_chr map_dbl reduce
 #' @export
 read_lotek <- function(files,
+                       ids = NULL,
                        remove_duplicates = TRUE,
                        show_col_types = FALSE) {
   #id_field <- rlang::enquo(id_field)
-  files %>%
-    purrr::map(~ read_lotek_2_sf(
-      filename = .x,
-      # id_field = !!id_field,
-      id = NULL,
-      show_col_types = show_col_types
-    )) %>%
-    purrr::reduce(bind_rows) ->
-  fixes
 
+  if(is_null(ids)){
+    files %>%
+      purrr::map(~ read_lotek_2_sf(
+        filename = .x,
+        id = NULL,
+        show_col_types = show_col_types )) %>%
+      purrr::reduce(bind_rows) ->
+      fixes
+  } else {
+    purrr::map2(files,
+                ids,
+                ~ read_lotek_2_sf(filename = .x,
+                                  id = .y,
+                                  show_col_types = show_col_types )) %>%
+      purrr::reduce(bind_rows) ->
+      fixes
+  }
   if (remove_duplicates) {
     fixes %>%
       group_by(device_id, Index) %>%
@@ -256,4 +267,16 @@ read_lotek_activity <- function(files) {
     purrr::map(read_lotek_activity_txt) %>%
     purrr::reduce(bind_rows) %>%
     distinct()
+}
+
+#' Extract the id info from a lotek filename
+#'
+#' @param path path or filename for a lotek data file.
+#' @return characters of the device id
+#'
+#' @export
+get_id_from_filename<- function(path) {
+  path %>%
+    basename() %>%
+    stringr::str_extract("[0-9]+")
 }
