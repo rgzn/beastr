@@ -4,7 +4,7 @@
 \alias{read_lotek}
 \title{Read Lotek gps txt files into a spatial dataframe.}
 \usage{
-read_lotek(files, remove_duplicates = TRUE, ...)
+read_lotek(files, remove_duplicates = TRUE, show_col_types = FALSE)
 }
 \arguments{
 \item{files}{Input files. This can be a path to a single file,
@@ -13,6 +13,8 @@ of paths to multiple files.}
 
 \item{remove_duplicates}{if `FALSE`, duplicate records are included
 in the output}
+
+\item{show_col_types}{Passed to readr functions. Useful for debugging.}
 
 \item{id}{the device id #. by default this comes from the filename}
 

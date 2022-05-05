@@ -3,7 +3,7 @@ pkgdown: 2.0.3.9000
 pkgdown_sha: 9dee019f9983b86585a77a3b1a1459b9f0390fe6
 articles:
   LearningR: LearningR.html
-last_built: 2022-05-04T23:59Z
+last_built: 2022-05-05T00:02Z
 urls:
   reference: https://rgzn.github.io/beastr/reference
   article: https://rgzn.github.io/beastr/articles

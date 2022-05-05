@@ -30,7 +30,7 @@ wildlife telemetry data.
 
 You can install the package using the [devtools](https://devtools.r-lib.org/) package
 
-``` r
+```{r, eval = FALSE}
 devtools::install_github('rgzn/beastr')
 ```
 
@@ -38,8 +38,9 @@ devtools::install_github('rgzn/beastr')
 
 Build your database:
 
-```{r example}
+```{r example, eval=FALSE}
 library(beastr)
+library(sf)
 
 # Use example source data
 fix_file = system.file("inst/lotek/33452.txt", package = "beastr")
@@ -62,7 +63,9 @@ sf::st_layers(myDB)
 
 View data linked to animals, rather than sensors:
 
-```{r}
+```{r, eval=FALSE}
+library(dplyr)
+library(ggplot2)
 
 points = sf::st_read(myDB, layer = "animal_fixes")
 

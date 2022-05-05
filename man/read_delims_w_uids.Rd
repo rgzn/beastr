@@ -5,7 +5,7 @@
 \title{Read a list of delimited text files that have a unique ID field.
 Use this field to pick only distinct entries.}
 \usage{
-read_delims_w_uids(input_files, id_field = ID)
+read_delims_w_uids(input_files, id_field = ID, show_col_types = FALSE)
 }
 \arguments{
 \item{input_files}{a single filename or a list of filenames. These are

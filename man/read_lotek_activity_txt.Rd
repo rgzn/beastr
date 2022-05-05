@@ -10,6 +10,8 @@ read_lotek_activity_txt(filename, show_col_types = FALSE)
 \item{filename}{A path to a single lotek activity text file.
 This should point to a lotek activity .csv files, which are
 not really true CSVs.}
+
+\item{show_col_types}{Passed on to [`readr`] functions. Useful for debugging.}
 }
 \description{
 Read single lotek activity 'csv' with header

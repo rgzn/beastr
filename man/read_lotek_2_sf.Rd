@@ -10,7 +10,8 @@ read_lotek_2_sf(
   input_crs = 4326,
   output_crs = 32611,
   tz = "UTC",
-  ingest_time = NA
+  ingest_time = NA,
+  show_col_types = FALSE
 )
 }
 \arguments{
