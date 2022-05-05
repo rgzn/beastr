@@ -82,14 +82,15 @@
 </h2>
 <p>Build your database:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rgzn.github.io/beastr/">beastr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rgzn.github.io/beastr/">beastr</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 7.2.1; sf_use_s2() is TRUE</span>
 
 <span class="co"># Use example source data</span>
-<span class="va">fix_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"inst/lotek/33452.txt"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
-<span class="va">device_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"inst/deployment/devices.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
-<span class="va">animal_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"inst/deployment/animals.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
-<span class="va">deploy_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"inst/deployment/deployments.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
+<span class="va">fix_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/33452.txt"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
+<span class="va">device_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"deployment/devices.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
+<span class="va">animal_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"deployment/animals.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
+<span class="va">deploy_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"deployment/deployments.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
 <span class="va">myDB</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="st">"/"</span>, <span class="st">"example.gpkg"</span><span class="op">)</span>
 
 <span class="co"># Build a database</span>
@@ -99,18 +100,69 @@
                deployment_files <span class="op">=</span> <span class="va">deploy_file</span>,
                dsn <span class="op">=</span> <span class="va">myDB</span>,
                tz <span class="op">=</span> <span class="st">"US/Pacific"</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 20 Columns: 6</span>
+<span class="co">#&gt; -- Column specification --------------------------------------------------------</span>
+<span class="co">#&gt; Delimiter: ","</span>
+<span class="co">#&gt; chr  (3): AnimalID, Start_Method, Stop_Method</span>
+<span class="co">#&gt; dbl  (1): DeviceID</span>
+<span class="co">#&gt; dttm (2): In_Service, Out_Service</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; i Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; i Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; Deleting source `C:\Users\JWEISS~1\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' failed</span>
+<span class="co">#&gt; Writing layer `fixes' to data source </span>
+<span class="co">#&gt;   `C:\Users\JWEISS~1\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' using driver `GPKG'</span>
+<span class="co">#&gt; Writing 468 features with 14 fields and geometry type Point.</span>
+<span class="co">#&gt; Deleting layer `devices' failed</span>
+<span class="co">#&gt; Writing layer `devices' to data source </span>
+<span class="co">#&gt;   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' using driver `GPKG'</span>
+<span class="co">#&gt; Writing 33 features with 7 fields without geometries.</span>
+<span class="co">#&gt; Deleting layer `animals' failed</span>
+<span class="co">#&gt; Writing layer `animals' to data source </span>
+<span class="co">#&gt;   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' using driver `GPKG'</span>
+<span class="co">#&gt; Writing 17 features with 5 fields without geometries.</span>
+<span class="co">#&gt; Deleting layer `deployments' failed</span>
+<span class="co">#&gt; Writing layer `deployments' to data source </span>
+<span class="co">#&gt;   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' using driver `GPKG'</span>
+<span class="co">#&gt; Writing 20 features with 6 fields without geometries.</span>
 
 <span class="co"># What layers are in there?</span>
-<span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_layers.html" class="external-link">st_layers</a></span><span class="op">(</span><span class="va">myDB</span><span class="op">)</span></code></pre></div>
+<span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_layers.html" class="external-link">st_layers</a></span><span class="op">(</span><span class="va">myDB</span><span class="op">)</span>
+<span class="co">#&gt; Driver: GPKG </span>
+<span class="co">#&gt; Available layers:</span>
+<span class="co">#&gt;     layer_name geometry_type features fields              crs_name</span>
+<span class="co">#&gt; 1        fixes         Point      468     14 WGS 84 / UTM zone 11N</span>
+<span class="co">#&gt; 2 animal_fixes         Point      462     12 WGS 84 / UTM zone 11N</span>
+<span class="co">#&gt; 3      devices            NA       33      7                  &lt;NA&gt;</span>
+<span class="co">#&gt; 4      animals            NA       17      5                  &lt;NA&gt;</span>
+<span class="co">#&gt; 5  deployments            NA       20      6                  &lt;NA&gt;</span></code></pre></div>
 <p>View data linked to animals, rather than sensors:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'dplyr'</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     filter, lag</span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="va">points</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="va">myDB</span>, layer <span class="op">=</span> <span class="st">"animal_fixes"</span><span class="op">)</span>
+<span class="co">#&gt; Reading layer `animal_fixes' from data source </span>
+<span class="co">#&gt;   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' </span>
+<span class="co">#&gt;   using driver `GPKG'</span>
+<span class="co">#&gt; Simple feature collection with 462 features and 12 fields (with 160 geometries empty)</span>
+<span class="co">#&gt; Geometry type: POINT</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 261780.2 ymin: 4173114 xmax: 267257.4 ymax: 4178607</span>
+<span class="co">#&gt; Projected CRS: WGS 84 / UTM zone 11N</span>
 
 <span class="va">points</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">animal_id</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="related-projects">Related Projects<a class="anchor" aria-label="anchor" href="#related-projects"></a>
@@ -126,9 +178,10 @@
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
 <ul>
-<li>integrate with amt (use amt tools)</li>
+<li>integrate with <a href="https://github.com/jmsigner/amt" class="external-link">amt</a> (use amt tools)</li>
 <li>integrate with movebank (export/import)</li>
 <li>add new readers as new devices are used</li>
+<li>use <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> for the shiny app stuff</li>
 </ul>
 </div>
 </div>
