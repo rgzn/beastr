@@ -239,19 +239,27 @@ append_database <- function(dsn,
 #' must be consistent with those in the target layer.
 #' @param dsn data source name. Typically a path to a geopackage.
 #' @param layer layer name to append.
+#' @param id_fields names of field on which to join the new data. These fields
+#' determine whether each row is unique using`dplyr::anti_join()`
 #' @importFrom dplyr anti_join
 #' @importFrom sf st_read st_write
 #' @export
 append_layer <- function(data,
                          dsn,
-                         layer) {
+                         layer,
+                         id_fields = NULL) {
+
   old_data = sf::st_read(dsn,
                          layer = layer,
                          as_tibble = TRUE)
+  # Cannot perform dplyr unions on 2 spatial
+  # dataframes, so convert one to non-spatial:
+  if("sf" %in% class(old_data)) {
+    old_data = sf::st_drop_geometry(old_data)
+  }
   data %>%
-    dplyr::anti_join(old_data) ->
+    dplyr::anti_join(old_data, by = id_fields) ->
     new_data
-
   sf::st_write(new_data,
                dsn = dsn,
                layer = layer,
