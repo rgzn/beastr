@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://rgzn.github.io/beastr/404.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>https://rgzn.github.io/beastr/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/LearningR.html</loc>
+    <loc>https://rgzn.github.io/beastr/articles/LearningR.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://rgzn.github.io/beastr/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://rgzn.github.io/beastr/index.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://rgzn.github.io/beastr/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/reference/beastr-package.html</loc>
+    <loc>https://rgzn.github.io/beastr/reference/append_database.html</loc>
   </url>
   <url>
-    <loc>/reference/build_database.html</loc>
+    <loc>https://rgzn.github.io/beastr/reference/append_layer.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://rgzn.github.io/beastr/reference/beastr-package.html</loc>
   </url>
   <url>
-    <loc>/reference/pipe.html</loc>
+    <loc>https://rgzn.github.io/beastr/reference/build_database.html</loc>
   </url>
   <url>
-    <loc>/reference/read_delims_w_uids.html</loc>
+    <loc>https://rgzn.github.io/beastr/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/read_lotek.html</loc>
+    <loc>https://rgzn.github.io/beastr/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>/reference/read_lotek_2_sf.html</loc>
+    <loc>https://rgzn.github.io/beastr/reference/read_delims_w_uids.html</loc>
   </url>
   <url>
-    <loc>/reference/read_lotek_activity.html</loc>
+    <loc>https://rgzn.github.io/beastr/reference/read_lotek.html</loc>
   </url>
   <url>
-    <loc>/reference/read_lotek_activity_txt.html</loc>
+    <loc>https://rgzn.github.io/beastr/reference/read_lotek_2_sf.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/reference/read_lotek_activity.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/reference/read_lotek_activity_txt.html</loc>
   </url>
 </urlset>
