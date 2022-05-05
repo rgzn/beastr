@@ -32,6 +32,7 @@ NULL
 #' @param input_crs reference system used for interpreting coords from file
 #' @param output_crs reference system for output spatial df
 #' @param tz timezone string to convert timezone processing
+#' @param show_col_types Passed to readr functions. Useful for debugging.
 #'
 #' @examples
 #' points = read_lotek(system.file("lotek/33452.txt", package="beastr"))
@@ -41,13 +42,14 @@ NULL
 #' @export
 read_lotek <- function(files,
                        remove_duplicates = TRUE,
-                       ...) {
+                       show_col_types = FALSE) {
   #id_field <- rlang::enquo(id_field)
   files %>%
     purrr::map(~ read_lotek_2_sf(
       filename = .x,
       # id_field = !!id_field,
-      id = NULL
+      id = NULL,
+      show_col_types = show_col_types
     )) %>%
     purrr::reduce(bind_rows) ->
   fixes
@@ -83,7 +85,8 @@ read_lotek_2_sf <- function(filename,
                             input_crs = 4326,
                             output_crs = 32611,
                             tz = "UTC",
-                            ingest_time = NA) {
+                            ingest_time = NA,
+                            show_col_types = FALSE) {
 
   # id_field = rlang::enquo(id_field)
 
@@ -130,11 +133,15 @@ read_lotek_2_sf <- function(filename,
   # 20220324: submitted issue to readr about this:
   # https://github.com/tidyverse/readr/issues/1393
   # -jw
-  readr::read_fwf(filename, n_max = 1) %>%
+  readr::read_fwf(filename,
+                  n_max = 1,
+                  show_col_types = show_col_types) %>%
     as.character() ->
   column_names
   # # Get columnar data
-  df <- readr::read_fwf(filename, skip = 1, col_type = "iccctctdddddddd")
+  df <- readr::read_fwf(filename, skip = 1,
+                        col_type = "iccctctdddddddd",
+                        show_col_types = show_col_types)
   # # Name columns
   names(df) <- column_names
 
@@ -193,6 +200,7 @@ read_lotek_2_sf <- function(filename,
 #' @param filename A path to a single lotek activity text file.
 #' This should point to a lotek activity .csv files, which are
 #' not really true CSVs.
+#' @param show_col_types Passed on to [`readr`] functions. Useful for debugging.
 read_lotek_activity_txt <- function(filename,
                                     show_col_types = FALSE) {
   # see ?readr::parse_datetime or base::strptime

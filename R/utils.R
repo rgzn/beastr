@@ -11,9 +11,13 @@
 #' @param id_field column/field name for the unique identifier. Defaults to "ID"
 #'
 read_delims_w_uids <- function(input_files,
-                               id_field = ID) {
+                               id_field = ID,
+                               show_col_types = FALSE) {
+  if (is_null(show_col_types)) {show_col_types = readr::should_show_types()}
+
   input_files %>%
-    map(readr::read_delim) %>%
+    map( ~readr::read_delim(file = .x,
+                            show_col_types = show_col_types) ) %>%
     reduce(bind_rows) %>%
     distinct({{ id_field }}, .keep_all = TRUE)
 }

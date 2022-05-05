@@ -84,8 +84,7 @@ build_database <- function(fix_files,
   fixes %>%
     st_write(dsn,
              layer = "fixes",
-             delete_dsn = delete_dsn,
-             )
+             delete_dsn = delete_dsn)
   devices %>%
     st_write(dsn,
              layer = "devices",
