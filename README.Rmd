@@ -38,15 +38,15 @@ devtools::install_github('rgzn/beastr')
 
 Build your database:
 
-```{r example, eval=FALSE}
-library(beastr)
-library(sf)
+```{r example, eval=TRUE, warning=FALSE}
+library(beastr, quietly = TRUE)
+library(sf, quietly = TRUE)
 
 # Use example source data
-fix_file = system.file("inst/lotek/33452.txt", package = "beastr")
-device_file = system.file("inst/deployment/devices.csv", package = "beastr")
-animal_file = system.file("inst/deployment/animals.csv", package = "beastr")
-deploy_file = system.file("inst/deployment/deployments.csv", package = "beastr")
+fix_file = system.file("lotek/33452.txt", package = "beastr")
+device_file = system.file("deployment/devices.csv", package = "beastr")
+animal_file = system.file("deployment/animals.csv", package = "beastr")
+deploy_file = system.file("deployment/deployments.csv", package = "beastr")
 myDB = paste0(tempdir(check = TRUE), "/", "example.gpkg")
 
 # Build a database
@@ -63,9 +63,9 @@ sf::st_layers(myDB)
 
 View data linked to animals, rather than sensors:
 
-```{r, eval=FALSE}
-library(dplyr)
-library(ggplot2)
+```{r eval=TRUE, warning=FALSE}
+library(dplyr, quietly = TRUE)
+library(ggplot2, quietly = TRUE)
 
 points = sf::st_read(myDB, layer = "animal_fixes")
 
@@ -83,6 +83,7 @@ points %>%
   - movebank [https://www.movebank.org/]
   
 ##  TODO
-  - integrate with amt (use amt tools)
+  - integrate with `{amt}` (use amt tools)
   - integrate with movebank (export/import)
   - add new readers as new devices are used
+  - use `{golem}` for the shiny app stuff
