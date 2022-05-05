@@ -4,7 +4,7 @@
 \alias{append_layer}
 \title{Insert rows into a spatial database}
 \usage{
-append_layer(data, dsn, layer)
+append_layer(data, dsn, layer, id_fields = NULL)
 }
 \arguments{
 \item{data}{a tibble or data frame to write to the database. The column names
@@ -13,6 +13,9 @@ must be consistent with those in the target layer.}
 \item{dsn}{data source name. Typically a path to a geopackage.}
 
 \item{layer}{layer name to append.}
+
+\item{id_fields}{names of field on which to join the new data. These fields
+determine whether each row is unique using`dplyr::anti_join()`}
 }
 \description{
 The `append_layer()` method assumes the data source already has a layer
