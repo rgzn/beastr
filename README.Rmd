@@ -21,7 +21,8 @@ knitr::opts_chunk$set(
 **B**etter **E**nvironment/**A**nimal **S**ensor **T**elemetry **R**epository
 
 "Better" as in "better than nothing". There are many other solutions that are more
-developed than this, most notably [Movebank](https://www.movebank.org/)
+developed than this, most notably [Movebank](https://www.movebank.org/). Also 
+I'm just really bad at naming things. 
 
 The goal of beastr is to provide a framework for storing, accessing, and processing
 wildlife telemetry data. 

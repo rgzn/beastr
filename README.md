@@ -11,7 +11,8 @@
 
 “Better” as in “better than nothing”. There are many other solutions
 that are more developed than this, most notably
-[Movebank](https://www.movebank.org/)
+[Movebank](https://www.movebank.org/). Also I’m just really bad at
+naming things.
 
 The goal of beastr is to provide a framework for storing, accessing, and
 processing wildlife telemetry data.
@@ -57,21 +58,21 @@ build_database(fix_files = fix_file,
 #> 
 #> i Use `spec()` to retrieve the full column specification for this data.
 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> Deleting source `C:\Users\JWEISS~1\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' failed
+#> Deleting source `C:\Users\JWEISS~1\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' failed
 #> Writing layer `fixes' to data source 
-#>   `C:\Users\JWEISS~1\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' using driver `GPKG'
+#>   `C:\Users\JWEISS~1\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'
 #> Writing 468 features with 14 fields and geometry type Point.
 #> Deleting layer `devices' failed
 #> Writing layer `devices' to data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' using driver `GPKG'
+#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'
 #> Writing 33 features with 7 fields without geometries.
 #> Deleting layer `animals' failed
 #> Writing layer `animals' to data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' using driver `GPKG'
+#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'
 #> Writing 4 features with 5 fields without geometries.
 #> Deleting layer `deployments' failed
 #> Writing layer `deployments' to data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' using driver `GPKG'
+#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'
 #> Writing 20 features with 6 fields without geometries.
 
 # What layers are in there?
@@ -102,7 +103,7 @@ library(ggplot2, quietly = TRUE)
 
 points = sf::st_read(myDB, layer = "animal_fixes")
 #> Reading layer `animal_fixes' from data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' 
+#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' 
 #>   using driver `GPKG'
 #> Simple feature collection with 462 features and 12 fields (with 160 geometries empty)
 #> Geometry type: POINT
