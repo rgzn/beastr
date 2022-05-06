@@ -1,8 +1,8 @@
 ---
-title: "LearningR"
+title: "Extra: Learning R"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{LearningR}
+  %\VignetteIndexEntry{Extra: Learning R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -118,6 +118,20 @@ Fortunately there is another path, and once again Hadley is there to guide us:
 
 __Advanced R__
 https://adv-r.hadley.nz/
+
+I built this package because I realized how hard it was to reliably share some 
+R scripts analyzing telemetry data. In much the same way as putting all your 
+telemetry data in a consistent self contained database allows you to share data
+and maintain data consistency, putting R code into a package allows you to share
+your code and maintain reproducibility. 
+
+Developing in the context of an R package is different than writing small 
+one-off scripts, but there are huge benefits, and once you are past the initial
+hurdles, it does not add an incredible amount of overhead. This book will guide 
+you through the process:
+
+__R Packages__
+https://r-pkgs.org/
 
 _________________
 
