@@ -1,0 +1,227 @@
+---
+title: "Introduction"
+output:
+  rmarkdown::html_vignette:
+        toc: true
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, warning = FALSE, message = FALSE}
+library(beastr)
+library(dplyr)
+library(readr)
+library(ggplot2)
+```
+
+## Getting Started
+_Help I have no idea what to do_
+
+This document goes over what data we need to assemble a database. It is likely 
+that you have this data already, but it may not be in the correct formats. The
+goal here is to give the user an idea of a principled way to organize their data.
+Unfortunately, assembling, formatting, and organizing data are not steps that 
+can be automated. 
+
+The example files here are all part of the package, so they live 
+in subdirectories of:
+```{r, eval=FALSE}
+# not evaluated because it illustrates a directory on author's machine:
+system.file("", package = "beastr")
+```
+And the directory structure therein represents one (of many) possibly ways to 
+structure your data directories.
+
+If you run this document from the .Rmd source, all the code sections like the
+above can be run on your computer. Some sections, like the above are specified 
+not to automatically evaluate. 
+
+If you would like more information about RMarkdown, or just R in general, please 
+see [the vignette on learning R](LearningR.html).
+
+
+## Motivation
+_Why would I bother?_
+
+
+
+Why does anyone need a database? What data goes in here? I will briefly try to 
+answer those questions here. 
+
+Wildlife telemetry data is collected from placing devices in the field or directly
+on subject animals. These devices record data such as GPS fixes, activity logs, photos, 
+etc. 
+
+We want to store and access not only information recorded by these devices, but 
+information intrinsic to the devices (serial #, weight, etc) and the animals 
+themselves (species, age, zodiac sign, etc). To maintain data validity, we 
+can use separate tables to store each type of data, and then link those tables
+together for our analyses. This prevents us from having to do things like having 
+to store all the information about Ricky the Weasel (eg. Favorite Food: Squirrel)
+on each of the twenty thousand records from the accelerometer on his collar.
+
+The principle of storing each piece of information only once is called 
+_atomicity_ and is key in preventing data mismatches as records are added or 
+changed. 
+
+For more motivation, please see the book that inspired this design:
+_Spatial Database for GPS Wildlife Tracking Data_
+[https://doi.org/10.1007/978-3-319-03743-1]()
+
+And the basic principles of database theory:
+[ACID](https://en.wikipedia.org/wiki/ACID)
+
+And lastly, while the database backend is admittedly tedious, it is essential
+for processing data, as in these guides:
+
+  - Telemetry Database Data Entry
+  - Wildlife Telemetry Quality Control
+  - Exploring Fisher Collar Data
+
+## Data Requirements
+_What am I even dealing with?_
+
+To build a new database, you will need to assemble the basic info as flat text 
+files. This is the hardest part of the whole process, as it cannot be scripted. 
+
+__Telemetry Data:__
+
+This guide deals with data from [Lotek](https://www.lotek.com/) telemetry
+devices. The principles and architecture may be extended to other devices, but
+some new data parsing code will be required. This assumes you have data processed
+with Lotek software that can be saved in Lotek's text file format. 
+
+These files are produced using Lotek's proprietary software. They look like 
+tab-delimitted text files, but there are some crucial differences. Let's take a 
+look at an example file:
+
+```{r}
+# Example Lotek Telemetry data:
+lotek_file = system.file("lotek/33452.txt", package = "beastr")
+readr::read_lines(lotek_file, n_max = 10)
+```
+
+You may notice some small details that make this file slightly difficult. There
+are empty fields, but there is no dedicated delimiter to separate them. The
+date/time fields are not standard formats and no coordinate reference system is
+specified. Also there is crucial information (Device ID) only specified in the 
+filename. 
+If we want to use this data, import it to R with the `read_lotek()`
+function:
+
+```{r}
+lotek_data = read_lotek(lotek_file)
+head(lotek_data)
+```
+
+Now we have tidy spatial data, and can do spatial manipulation with it.
+```{r}
+ggplot(lotek_data) + 
+  geom_sf() +
+  ggtitle("Some Points from a Lotek Collar")
+```
+
+Telemetry devices may have other sensors as well. An example of this is "activity"
+data. These records are records from the on-board accelerometer aggregated into
+a measure called [Overall Dynamic Body Acceleration (ODBA)](). These records
+are recorded on a different schedule from the GPS fixes, so must be stored 
+separately. Again, Lotek uses a file format that is *almost* a standard csv, but 
+not quite, so we'll need to use the function `read_lotek_activity()` from this
+package:
+
+```{r}
+# Starts as 2 columns, switches to 3, doesn't parse:
+system.file("lotek/activity.csv", package = "beastr") %>% 
+  readr::read_delim(delim = ",", show_col_types = FALSE, n_max = 6)
+
+# Using beastr:
+system.file("lotek/activity.csv", package = "beastr") %>% 
+  read_lotek_activity()
+```
+
+
+_{TODO}_: _Add support for more input file formats. This can be done as it 
+becomes necessary with new devices. To preserve data, records with different 
+fields for different types of devices should be stored in different tables. The
+crucial information is joined together into a single `VIEW` using the `deployments` table._ 
+
+__Device Data:__
+
+Beyond the data recorded by the telemetry devices, we also want to store 
+information about the devices themselves. This includes things like the serial
+number, manufacturer, attachment type, etc. This is data tied to a device that 
+does not vary between the individual samples recorded by the device. 
+
+This data does not automatically come from the device, so it needs to be 
+manually assembled into one or more CSV/spreadsheets. 
+
+Here's what an example looks like:
+
+```{r}
+device_file = system.file("devices/collars.csv", package = "beastr")
+readr::read_csv(device_file) %>% head(4)
+```
+
+In this case, we only have one list of devices. But if there were others that 
+we wanted to combine, we could search for them using `fs`:
+
+```{r}
+# Find all CSVs in the device directory:
+device_dir = system.file("devices", package = "beastr")
+fs::dir_ls(device_dir, regexp = "*.csv", recurse = TRUE)
+```
+
+
+__Animal Data:__
+
+The whole reason we are doing this is to learn about animals. We need to store 
+information about them! A lot of what we know about the animals does not come 
+from a telemetry device, we need to compile it here. 
+
+Again, this will be one ormore flat CSV/spreadsheets. 
+
+Here's what an example looks like, this time we're reading multiple files in:
+```{r}
+animal_dir = system.file("animals", package = "beastr")
+animal_files = fs::dir_ls(animal_dir, regexp = "*.csv", recurse = TRUE)
+readr::read_csv(animal_files) 
+```
+
+__Deployment Data:__
+Animal telemetry devices are deployed on animals, but some animals may have 
+multiple devices, and devices often record data even when they are not deployed.
+In order to properly tie the various recorded data to their animals, we need to 
+store deployment info. The key fields of this data are: _device_id_, _animal_id_,
+_in_service_, _out_service_. There are more fields, but those are the key to 
+understanding the purpose of this data. 
+
+Again, this will be one or more flat CSV/spreadsheets. 
+
+Example:
+
+```{r}
+deploy_file = system.file("deployments/deployments.csv", package = "beastr")
+readr::read_csv(deploy_file)
+```
+
+_{TODO}_: _Need to add a non-animal deployment table for environmental and 
+ambient devices. This should be a spatial table._
+
+_Some telemetry devices may record environmental data (such as weather stations)
+or ambient data (like Acoustic Recording Units), and are not tied to a specific 
+animal. [NOT YET IMPLEMENTED]_
+
+
+# Building a Geopackage
+
+
+

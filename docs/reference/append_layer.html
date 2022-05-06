@@ -30,7 +30,10 @@ in order to handle spatial data."><!-- mathjax --><script src="https://cdnjs.clo
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/Build_DB.html">Build_DB</a>
+    <a class="dropdown-item" href="../articles/Introduction.html">Introduction</a>
     <a class="dropdown-item" href="../articles/LearningR.html">LearningR</a>
+    <a class="dropdown-item" href="../articles/QualityControl.html">QualityControl</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -57,7 +60,7 @@ in order to handle spatial data.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">append_layer</span><span class="op">(</span><span class="va">data</span>, <span class="va">dsn</span>, <span class="va">layer</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">append_layer</span><span class="op">(</span><span class="va">data</span>, <span class="va">dsn</span>, <span class="va">layer</span>, id_fields <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -69,6 +72,9 @@ must be consistent with those in the target layer.</p></dd>
 <dd><p>data source name. Typically a path to a geopackage.</p></dd>
 <dt>layer</dt>
 <dd><p>layer name to append.</p></dd>
+<dt>id_fields</dt>
+<dd><p>names of field on which to join the new data. These fields
+determine whether each row is unique using`dplyr::anti_join()`</p></dd>
 </dl></div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

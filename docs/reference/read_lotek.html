@@ -30,7 +30,10 @@ Only the duplicate from the most recent file is kept."><!-- mathjax --><script s
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/Build_DB.html">Build_DB</a>
+    <a class="dropdown-item" href="../articles/Introduction.html">Introduction</a>
     <a class="dropdown-item" href="../articles/LearningR.html">LearningR</a>
+    <a class="dropdown-item" href="../articles/QualityControl.html">QualityControl</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -57,7 +60,7 @@ Only the duplicate from the most recent file is kept.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_lotek</span><span class="op">(</span><span class="va">files</span>, remove_duplicates <span class="op">=</span> <span class="cn">TRUE</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_lotek</span><span class="op">(</span><span class="va">files</span>, ids <span class="op">=</span> <span class="cn">NULL</span>, remove_duplicates <span class="op">=</span> <span class="cn">TRUE</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -66,13 +69,15 @@ Only the duplicate from the most recent file is kept.</p>
 <dd><p>Input files. This can be a path to a single file,
 a character vector of paths to multiple files, or a list
 of paths to multiple files.</p></dd>
+<dt>ids</dt>
+<dd><p>the device id #s. by default this comes from the filename.
+Note that shiny file input will change filenames, so this field must be used
+in that case.</p></dd>
 <dt>remove_duplicates</dt>
 <dd><p>if `FALSE`, duplicate records are included
 in the output</p></dd>
 <dt>show_col_types</dt>
 <dd><p>Passed to readr functions. Useful for debugging.</p></dd>
-<dt>id</dt>
-<dd><p>the device id #. by default this comes from the filename</p></dd>
 <dt>input_crs</dt>
 <dd><p>reference system used for interpreting coords from file</p></dd>
 <dt>output_crs</dt>
@@ -110,12 +115,12 @@ in the output</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   : 1.412   Max.   :2271   Max.   :285.000   Max.   :5.6000  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   NA's   :164    NA's   :164       NA's   :164     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Temperature(C)    Voltage(V)     Ingest_Time                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   : 0.00   Min.   :3.750   Min.   :2021-12-08 17:44:08  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:16.50   1st Qu.:3.800   1st Qu.:2021-12-08 17:44:08  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :20.50   Median :3.800   Median :2021-12-08 17:44:08  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :22.57   Mean   :3.821   Mean   :2021-12-08 17:44:08  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:32.00   3rd Qu.:3.850   3rd Qu.:2021-12-08 17:44:08  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :38.00   Max.   :3.850   Max.   :2021-12-08 17:44:08  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   : 0.00   Min.   :3.750   Min.   :2022-05-06 11:08:36  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:16.50   1st Qu.:3.800   1st Qu.:2022-05-06 11:08:36  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :20.50   Median :3.800   Median :2022-05-06 11:08:36  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :22.57   Mean   :3.821   Mean   :2022-05-06 11:08:36  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:32.00   3rd Qu.:3.850   3rd Qu.:2022-05-06 11:08:36  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :38.00   Max.   :3.850   Max.   :2022-05-06 11:08:36  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           geometry        time                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  POINT        :468   Min.   :2021-11-23 21:38:46  </span>

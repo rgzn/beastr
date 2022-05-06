@@ -4,10 +4,19 @@
     <loc>https://rgzn.github.io/beastr/404.html</loc>
   </url>
   <url>
+    <loc>https://rgzn.github.io/beastr/articles/Build_DB.html</loc>
+  </url>
+  <url>
     <loc>https://rgzn.github.io/beastr/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://rgzn.github.io/beastr/articles/Introduction.html</loc>
+  </url>
+  <url>
     <loc>https://rgzn.github.io/beastr/articles/LearningR.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/articles/QualityControl.html</loc>
   </url>
   <url>
     <loc>https://rgzn.github.io/beastr/authors.html</loc>
@@ -31,6 +40,12 @@
     <loc>https://rgzn.github.io/beastr/reference/build_database.html</loc>
   </url>
   <url>
+    <loc>https://rgzn.github.io/beastr/reference/get_elevation_dem.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/reference/get_id_from_filename.html</loc>
+  </url>
+  <url>
     <loc>https://rgzn.github.io/beastr/reference/index.html</loc>
   </url>
   <url>
@@ -50,5 +65,8 @@
   </url>
   <url>
     <loc>https://rgzn.github.io/beastr/reference/read_lotek_activity_txt.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/reference/speed.html</loc>
   </url>
 </urlset>
