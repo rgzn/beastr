@@ -36,9 +36,9 @@ library(sf, quietly = TRUE)
 
 # Use example source data
 fix_file = system.file("lotek/33452.txt", package = "beastr")
-device_file = system.file("deployment/devices.csv", package = "beastr")
-animal_file = system.file("deployment/animals.csv", package = "beastr")
-deploy_file = system.file("deployment/deployments.csv", package = "beastr")
+device_file = system.file("devices/collars.csv", package = "beastr")
+animal_file = system.file("animals/critters.csv", package = "beastr")
+deploy_file = system.file("deployments/deployments.csv", package = "beastr")
 myDB = paste0(tempdir(check = TRUE), "/", "example.gpkg")
 
 # Build a database
@@ -57,21 +57,21 @@ build_database(fix_files = fix_file,
 #> 
 #> i Use `spec()` to retrieve the full column specification for this data.
 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> Deleting source `C:\Users\JWEISS~1\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' failed
+#> Deleting source `C:\Users\JWEISS~1\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' failed
 #> Writing layer `fixes' to data source 
-#>   `C:\Users\JWEISS~1\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' using driver `GPKG'
+#>   `C:\Users\JWEISS~1\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' using driver `GPKG'
 #> Writing 468 features with 14 fields and geometry type Point.
 #> Deleting layer `devices' failed
 #> Writing layer `devices' to data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' using driver `GPKG'
+#>   `C:\Users\jweissman\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' using driver `GPKG'
 #> Writing 33 features with 7 fields without geometries.
 #> Deleting layer `animals' failed
 #> Writing layer `animals' to data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' using driver `GPKG'
-#> Writing 17 features with 5 fields without geometries.
+#>   `C:\Users\jweissman\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' using driver `GPKG'
+#> Writing 4 features with 5 fields without geometries.
 #> Deleting layer `deployments' failed
 #> Writing layer `deployments' to data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' using driver `GPKG'
+#>   `C:\Users\jweissman\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' using driver `GPKG'
 #> Writing 20 features with 6 fields without geometries.
 
 # What layers are in there?
@@ -82,7 +82,7 @@ sf::st_layers(myDB)
 #> 1        fixes         Point      468     14 WGS 84 / UTM zone 11N
 #> 2 animal_fixes         Point      462     12 WGS 84 / UTM zone 11N
 #> 3      devices            NA       33      7                  <NA>
-#> 4      animals            NA       17      5                  <NA>
+#> 4      animals            NA        4      5                  <NA>
 #> 5  deployments            NA       20      6                  <NA>
 ```
 
@@ -102,7 +102,7 @@ library(ggplot2, quietly = TRUE)
 
 points = sf::st_read(myDB, layer = "animal_fixes")
 #> Reading layer `animal_fixes' from data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpMJcMfq\example.gpkg' 
+#>   `C:\Users\jweissman\AppData\Local\Temp\1\Rtmpy6bKRS\example.gpkg' 
 #>   using driver `GPKG'
 #> Simple feature collection with 462 features and 12 fields (with 160 geometries empty)
 #> Geometry type: POINT

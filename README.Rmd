@@ -44,9 +44,9 @@ library(sf, quietly = TRUE)
 
 # Use example source data
 fix_file = system.file("lotek/33452.txt", package = "beastr")
-device_file = system.file("deployment/devices.csv", package = "beastr")
-animal_file = system.file("deployment/animals.csv", package = "beastr")
-deploy_file = system.file("deployment/deployments.csv", package = "beastr")
+device_file = system.file("devices/collars.csv", package = "beastr")
+animal_file = system.file("animals/critters.csv", package = "beastr")
+deploy_file = system.file("deployments/deployments.csv", package = "beastr")
 myDB = paste0(tempdir(check = TRUE), "/", "example.gpkg")
 
 # Build a database
