@@ -106,7 +106,7 @@ look at an example file:
 
 ```{r}
 # Example Lotek Telemetry data:
-lotek_file = system.file("lotek/33452.txt", package = "beastr")
+lotek_file = system.file("lotek/PinPoint33452.txt", package = "beastr")
 readr::read_lines(lotek_file, n_max = 10)
 ```
 
@@ -223,5 +223,29 @@ animal. [NOT YET IMPLEMENTED]_
 
 # Building a Geopackage
 
+Now that you understand the raw data formats, we can run the script in the 
+README:
 
+```{r}
+# Use example source data
+fix_file = system.file("lotek/PinPoint33452.txt", package = "beastr")
+device_file = system.file("devices/collars.csv", package = "beastr")
+animal_file = system.file("animals/critters.csv", package = "beastr")
+deploy_file = system.file("deployments/deployments.csv", package = "beastr")
+activity_file = system.file("lotek/activity.txt", package = "beastr")
+
+# Create a path to a geopackage in a temporary directory:
+myDB = paste0(tempdir(check = TRUE), "/", "example.gpkg")
+
+# Build a database
+build_database(fix_files = fix_file,
+               device_files = device_file,
+               animal_files = animal_file,
+               deployment_files = deploy_file,
+               dsn = myDB,
+               tz = "US/Pacific")
+
+# What layers are in there?
+sf::st_layers(myDB)
+```
 

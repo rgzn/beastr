@@ -37,7 +37,7 @@ NULL
 #' @param show_col_types Passed to readr functions. Useful for debugging.
 #'
 #' @examples
-#' points = read_lotek(system.file("lotek/33452.txt", package="beastr"))
+#' points = read_lotek(system.file("lotek/PinPoint33452.txt", package="beastr"))
 #' summary(points)
 #'
 #' @importFrom purrr pluck map map_chr map_dbl reduce

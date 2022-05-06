@@ -44,7 +44,7 @@ library(beastr, quietly = TRUE)
 library(sf, quietly = TRUE)
 
 # Use example source data
-fix_file = system.file("lotek/33452.txt", package = "beastr")
+fix_file = system.file("lotek/PinPoint33452.txt", package = "beastr")
 device_file = system.file("devices/collars.csv", package = "beastr")
 animal_file = system.file("animals/critters.csv", package = "beastr")
 deploy_file = system.file("deployments/deployments.csv", package = "beastr")

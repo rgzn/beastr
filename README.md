@@ -35,7 +35,7 @@ library(beastr, quietly = TRUE)
 library(sf, quietly = TRUE)
 
 # Use example source data
-fix_file = system.file("lotek/33452.txt", package = "beastr")
+fix_file = system.file("lotek/PinPoint33452.txt", package = "beastr")
 device_file = system.file("devices/collars.csv", package = "beastr")
 animal_file = system.file("animals/critters.csv", package = "beastr")
 deploy_file = system.file("deployments/deployments.csv", package = "beastr")
@@ -77,7 +77,7 @@ library(ggplot2, quietly = TRUE)
 
 points = sf::st_read(myDB, layer = "animal_fixes")
 #> Reading layer `animal_fixes' from data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpIP1rf7\example.gpkg' 
+#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpqMtMLo\example.gpkg' 
 #>   using driver `GPKG'
 #> Simple feature collection with 462 features and 12 fields (with 160 geometries empty)
 #> Geometry type: POINT

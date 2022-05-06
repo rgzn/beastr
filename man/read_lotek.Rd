@@ -33,7 +33,7 @@ of the same fix record, duplicates will be removed by default.
 Only the duplicate from the most recent file is kept.
 }
 \examples{
-points = read_lotek(system.file("lotek/33452.txt", package="beastr"))
+points = read_lotek(system.file("lotek/PinPoint33452.txt", package="beastr"))
 summary(points)
 
 }
