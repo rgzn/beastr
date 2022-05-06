@@ -82,21 +82,21 @@ build_database <- function(fix_files,
 
   # Write tables into a geopackage (SQLite DB)
   fixes %>%
-    st_write(dsn,
+    sf::st_write(dsn,
              layer = "fixes",
              delete_dsn = delete_dsn)
   devices %>%
-    st_write(dsn,
+    sf::st_write(dsn,
              layer = "devices",
              delete_layer = delete_dsn)
 
   animals %>%
-    st_write(dsn,
+    sf::st_write(dsn,
              layer = "animals",
              delete_layer = delete_dsn)
 
   deployments %>%
-    st_write(dsn,
+    sf::st_write(dsn,
              layer = "deployments",
              delete_layer = delete_dsn)
 
@@ -226,8 +226,9 @@ append_database <- function(dsn,
     read_lotek(fix_files) %>%
       append_layer(dsn = dsn, layer = "fixes")
   }
-
 }
+
+
 
 #' Insert rows into a spatial database
 #'
