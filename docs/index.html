@@ -87,7 +87,6 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rgzn.github.io/beastr/">beastr</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 7.2.1; sf_use_s2() is TRUE</span>
 
 <span class="co"># Use example source data</span>
 <span class="va">fix_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/33452.txt"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
@@ -103,31 +102,6 @@
                deployment_files <span class="op">=</span> <span class="va">deploy_file</span>,
                dsn <span class="op">=</span> <span class="va">myDB</span>,
                tz <span class="op">=</span> <span class="st">"US/Pacific"</span><span class="op">)</span>
-<span class="co">#&gt; Rows: 20 Columns: 6</span>
-<span class="co">#&gt; -- Column specification --------------------------------------------------------</span>
-<span class="co">#&gt; Delimiter: ","</span>
-<span class="co">#&gt; chr  (3): AnimalID, Start_Method, Stop_Method</span>
-<span class="co">#&gt; dbl  (1): DeviceID</span>
-<span class="co">#&gt; dttm (2): In_Service, Out_Service</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; i Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; i Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
-<span class="co">#&gt; Deleting source `C:\Users\JWEISS~1\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' failed</span>
-<span class="co">#&gt; Writing layer `fixes' to data source </span>
-<span class="co">#&gt;   `C:\Users\JWEISS~1\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'</span>
-<span class="co">#&gt; Writing 468 features with 14 fields and geometry type Point.</span>
-<span class="co">#&gt; Deleting layer `devices' failed</span>
-<span class="co">#&gt; Writing layer `devices' to data source </span>
-<span class="co">#&gt;   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'</span>
-<span class="co">#&gt; Writing 33 features with 7 fields without geometries.</span>
-<span class="co">#&gt; Deleting layer `animals' failed</span>
-<span class="co">#&gt; Writing layer `animals' to data source </span>
-<span class="co">#&gt;   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'</span>
-<span class="co">#&gt; Writing 4 features with 5 fields without geometries.</span>
-<span class="co">#&gt; Deleting layer `deployments' failed</span>
-<span class="co">#&gt; Writing layer `deployments' to data source </span>
-<span class="co">#&gt;   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'</span>
-<span class="co">#&gt; Writing 20 features with 6 fields without geometries.</span>
 
 <span class="co"># What layers are in there?</span>
 <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_layers.html" class="external-link">st_layers</a></span><span class="op">(</span><span class="va">myDB</span><span class="op">)</span>
@@ -154,7 +128,7 @@
 
 <span class="va">points</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="va">myDB</span>, layer <span class="op">=</span> <span class="st">"animal_fixes"</span><span class="op">)</span>
 <span class="co">#&gt; Reading layer `animal_fixes' from data source </span>
-<span class="co">#&gt;   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' </span>
+<span class="co">#&gt;   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpIP1rf7\example.gpkg' </span>
 <span class="co">#&gt;   using driver `GPKG'</span>
 <span class="co">#&gt; Simple feature collection with 462 features and 12 fields (with 160 geometries empty)</span>
 <span class="co">#&gt; Geometry type: POINT</span>

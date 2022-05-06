@@ -33,7 +33,6 @@ Build your database:
 ``` r
 library(beastr, quietly = TRUE)
 library(sf, quietly = TRUE)
-#> Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 7.2.1; sf_use_s2() is TRUE
 
 # Use example source data
 fix_file = system.file("lotek/33452.txt", package = "beastr")
@@ -49,31 +48,6 @@ build_database(fix_files = fix_file,
                deployment_files = deploy_file,
                dsn = myDB,
                tz = "US/Pacific")
-#> Rows: 20 Columns: 6
-#> -- Column specification --------------------------------------------------------
-#> Delimiter: ","
-#> chr  (3): AnimalID, Start_Method, Stop_Method
-#> dbl  (1): DeviceID
-#> dttm (2): In_Service, Out_Service
-#> 
-#> i Use `spec()` to retrieve the full column specification for this data.
-#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> Deleting source `C:\Users\JWEISS~1\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' failed
-#> Writing layer `fixes' to data source 
-#>   `C:\Users\JWEISS~1\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'
-#> Writing 468 features with 14 fields and geometry type Point.
-#> Deleting layer `devices' failed
-#> Writing layer `devices' to data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'
-#> Writing 33 features with 7 fields without geometries.
-#> Deleting layer `animals' failed
-#> Writing layer `animals' to data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'
-#> Writing 4 features with 5 fields without geometries.
-#> Deleting layer `deployments' failed
-#> Writing layer `deployments' to data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' using driver `GPKG'
-#> Writing 20 features with 6 fields without geometries.
 
 # What layers are in there?
 sf::st_layers(myDB)
@@ -103,7 +77,7 @@ library(ggplot2, quietly = TRUE)
 
 points = sf::st_read(myDB, layer = "animal_fixes")
 #> Reading layer `animal_fixes' from data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpGW1b44\example.gpkg' 
+#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpIP1rf7\example.gpkg' 
 #>   using driver `GPKG'
 #> Simple feature collection with 462 features and 12 fields (with 160 geometries empty)
 #> Geometry type: POINT

@@ -39,7 +39,7 @@ devtools::install_github('rgzn/beastr')
 
 Build your database:
 
-```{r example, eval=TRUE, warning=FALSE}
+```{r example, eval=TRUE, message=FALSE, warning=FALSE}
 library(beastr, quietly = TRUE)
 library(sf, quietly = TRUE)
 

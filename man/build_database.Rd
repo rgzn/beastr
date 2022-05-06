@@ -12,7 +12,8 @@ build_database(
   dsn = "~/beastr_db.gpkg",
   delete_dsn = TRUE,
   locale = NULL,
-  tz = NULL
+  tz = NULL,
+  quiet = TRUE
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ a .gpkg file.}
 \item{locale}{Specify time zone using locale object. See [readr::locale()]}
 
 \item{tz}{Specify time zone using known character string. ie "US/Pacific"}
+
+\item{quiet}{Boolean passed to `sf::st_write()`}
 }
 \value{
 [build_database()] returns `TRUE`, invisibly.

@@ -22,6 +22,7 @@
 #' @param delete_dsn If TRUE, remove existing dsn.
 #' @param locale Specify time zone using locale object. See [readr::locale()]
 #' @param tz Specify time zone using known character string. ie "US/Pacific"
+#' @param quiet Boolean passed to `sf::st_write()`
 #' @return [build_database()] returns `TRUE`, invisibly.
 #'
 #' @examples
@@ -54,7 +55,8 @@ build_database <- function(fix_files,
                            dsn = "~/beastr_db.gpkg",
                            delete_dsn = TRUE,
                            locale = NULL,
-                           tz = NULL) {
+                           tz = NULL,
+                           quiet = TRUE) {
   # Set timezone/locale for reading in date time strings
   # NOTE: this does not change the locale in `read_lotek_2_sf`
   # which is always UTC
@@ -84,21 +86,25 @@ build_database <- function(fix_files,
   fixes %>%
     sf::st_write(dsn,
              layer = "fixes",
-             delete_dsn = delete_dsn)
+             delete_dsn = delete_dsn,
+             quiet = quiet)
   devices %>%
     sf::st_write(dsn,
              layer = "devices",
-             delete_layer = delete_dsn)
+             delete_layer = delete_dsn,
+             quiet = quiet)
 
   animals %>%
     sf::st_write(dsn,
              layer = "animals",
-             delete_layer = delete_dsn)
+             delete_layer = delete_dsn,
+             quiet = quiet)
 
   deployments %>%
     sf::st_write(dsn,
              layer = "deployments",
-             delete_layer = delete_dsn)
+             delete_layer = delete_dsn,
+             quiet = quiet)
 
   # Connect to newly created DB:
   con <- DBI::dbConnect(RSQLite::SQLite(), dsn)
