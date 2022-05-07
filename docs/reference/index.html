@@ -25,15 +25,21 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Build_DB.html">Build_DB</a>
-    <a class="dropdown-item" href="../articles/Introduction.html">Introduction</a>
-    <a class="dropdown-item" href="../articles/LearningR.html">LearningR</a>
+    <a class="dropdown-item" href="../articles/Introduction.html">1. Introduction</a>
+    <a class="dropdown-item" href="../articles/LearningR.html">Extra: Learning R</a>
     <a class="dropdown-item" href="../articles/QualityControl.html">QualityControl</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/rgzn/beastr/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -71,10 +77,19 @@
         <dd>Construct geopackage sqlite database from raw data</dd>
       </dl><dl><dt>
           
+          <code><a href="get_animal_fixes.html">get_animal_fixes()</a></code> 
+        </dt>
+        <dd>Get fixes tied to animals rather than devices</dd>
+      </dl><dl><dt>
+          
           <code><a href="get_elevation_dem.html">get_elevation_dem()</a></code> 
         </dt>
-        <dd>Example tif for dem:
-dem_src = "USGS_13_n38w120_20210701.tif"</dd>
+        <dd>Add elevation column for an sf POINT collection.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_elevation_difference.html">get_elevation_difference()</a></code> 
+        </dt>
+        <dd>Get difference between DEM raster and elevation column in an sfc</dd>
       </dl><dl><dt>
           
           <code><a href="get_id_from_filename.html">get_id_from_filename()</a></code> 

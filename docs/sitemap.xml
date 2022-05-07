@@ -40,7 +40,13 @@
     <loc>https://rgzn.github.io/beastr/reference/build_database.html</loc>
   </url>
   <url>
+    <loc>https://rgzn.github.io/beastr/reference/get_animal_fixes.html</loc>
+  </url>
+  <url>
     <loc>https://rgzn.github.io/beastr/reference/get_elevation_dem.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/reference/get_elevation_difference.html</loc>
   </url>
   <url>
     <loc>https://rgzn.github.io/beastr/reference/get_id_from_filename.html</loc>
