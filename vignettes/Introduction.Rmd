@@ -1,10 +1,10 @@
 ---
-title: "Introduction"
+title: "1. Introduction"
 output:
   rmarkdown::html_vignette:
         toc: true
 vignette: >
-  %\VignetteIndexEntry{Introduction}
+  %\VignetteIndexEntry{1. Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -221,7 +221,7 @@ or ambient data (like Acoustic Recording Units), and are not tied to a specific
 animal. [NOT YET IMPLEMENTED]_
 
 
-# Building a Geopackage
+## Building a Geopackage
 
 Now that you understand the raw data formats, we can run the script in the 
 README:

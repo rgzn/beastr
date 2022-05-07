@@ -12,6 +12,7 @@ Manage wildlife telemetry data. This package provides the infrastructure needed 
 Useful links:
 \itemize{
   \item \url{https://rgzn.github.io/beastr/}
+  \item \url{https://github.com/rgzn/beastr/}
 }
 
 }

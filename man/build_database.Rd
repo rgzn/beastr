@@ -53,7 +53,7 @@ deployments, and the data files, and constructs a geopackage
 }
 \examples{
 \dontrun{
- fix_file = system.file("inst/lotek/33452.txt", package = "beastr")
+ fix_file = system.file("inst/lotek/PinPoint33452.txt", package = "beastr")
  device_file = system.file("inst/deployment/devices.csv", package = "beastr")
  animal_file = system.file("inst/deployment/animals.csv", package = "beastr")
  deploy_file = system.file("inst/deployment/deployments.csv", package = "beastr")
