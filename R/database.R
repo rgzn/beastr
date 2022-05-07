@@ -273,3 +273,16 @@ append_layer <- function(data,
                layer = layer,
                append = TRUE)
 }
+
+
+#' Get fixes tied to animals rather than devices
+#'
+#' @details A wrapper for `sf::st_read()`. Helps simplify code.
+#' @param dsn Path to database
+#' @importFrom sf st_read
+#' @returns sf POINT collection
+#' @export
+get_animal_fixes <- function(dsn) {
+  sf::st_read(dsn, layer = "animal_fixes")
+}
+
