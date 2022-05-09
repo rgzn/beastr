@@ -140,11 +140,11 @@ package:
 
 ```{r}
 # Starts as 2 columns, switches to 3, doesn't parse:
-system.file("lotek/activity.csv", package = "beastr") %>% 
+system.file("lotek/activity33452.csv", package = "beastr") %>% 
   readr::read_delim(delim = ",", show_col_types = FALSE, n_max = 6)
 
 # Using beastr:
-system.file("lotek/activity.csv", package = "beastr") %>% 
+system.file("lotek/activity33452.csv", package = "beastr") %>% 
   read_lotek_activity()
 ```
 
@@ -255,10 +255,12 @@ example of adding an extra layer to an existing database:
 
 ```{r message=FALSE, warning=FALSE}
 activity_data = read_lotek_activity(activity_file)
-append_layer(data = activity_data, dsn = myDB)
+append_layer(data = activity_data,
+             dsn = myDB,
+             layer = "activity")
 
-# a new layer: 
-sf::st_layer(myDB)
+# a new layer:
+sf::st_layers(myDB)
 
 ```
 
