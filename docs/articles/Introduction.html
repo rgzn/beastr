@@ -41,10 +41,10 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Build_DB.html">Build_DB</a>
+    <a class="dropdown-item" href="../articles/Explore.html">3. Exploring the Data</a>
     <a class="dropdown-item" href="../articles/Introduction.html">1. Introduction</a>
     <a class="dropdown-item" href="../articles/LearningR.html">Extra: Learning R</a>
-    <a class="dropdown-item" href="../articles/QualityControl.html">QualityControl</a>
+    <a class="dropdown-item" href="../articles/QualityControl.html">2. Filtering Data</a>
   </div>
 </li>
       </ul>
@@ -167,7 +167,7 @@
 <p>Telemetry devices may have other sensors as well. An example of this is “activity” data. These records are records from the on-board accelerometer aggregated into a measure called <a href="">Overall Dynamic Body Acceleration (ODBA)</a>. These records are recorded on a different schedule from the GPS fixes, so must be stored separately. Again, Lotek uses a file format that is <em>almost</em> a standard csv, but not quite, so we’ll need to use the function <code><a href="../reference/read_lotek_activity.html">read_lotek_activity()</a></code> from this package:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Starts as 2 columns, switches to 3, doesn't parse:</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/activity.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/activity33452.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_delim</a></span><span class="op">(</span>delim <span class="op">=</span> <span class="st">","</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span>, n_max <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
 <span class="co">#&gt; Warning: One or more parsing issues, see `problems()` for details</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 x 1</span></span>
@@ -181,7 +181,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 11/23/2021 9:50:00 PM,7,5.0</span>
 
 <span class="co"># Using beastr:</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/activity.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/activity33452.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/read_lotek_activity.html">read_lotek_activity</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 4,321 x 4</span></span>
 <span class="co">#&gt;    device_id time                 ODBA `Temperature [C]`</span>
@@ -225,7 +225,7 @@
 <code class="sourceCode R"><span class="co"># Find all CSVs in the device directory:</span>
 <span class="va">device_dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"devices"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
 <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="va">device_dir</span>, regexp <span class="op">=</span> <span class="st">"*.csv"</span>, recurse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; C:/Users/jweissman/AppData/Local/Temp/1/RtmpE50PJA/temp_libpath21a43c972a67/beastr/devices/collars.csv</span></code></pre></div>
+<span class="co">#&gt; C:/Users/jweissman/AppData/Local/Temp/1/RtmpIHiZgo/temp_libpath4bc8240122a6/beastr/devices/collars.csv</span></code></pre></div>
 <p><strong>Animal Data:</strong></p>
 <p>The whole reason we are doing this is to learn about animals. We need to store information about them! A lot of what we know about the animals does not come from a telemetry device, we need to compile it here.</p>
 <p>Again, this will be one ormore flat CSV/spreadsheets.</p>
@@ -314,7 +314,7 @@
 <span class="va">device_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"devices/collars.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
 <span class="va">animal_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"animals/critters.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
 <span class="va">deploy_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"deployments/deployments.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
-<span class="va">activity_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/activity.txt"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
+<span class="va">activity_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/activity33452.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
 
 <span class="co"># Create a path to a geopackage in a temporary directory:</span>
 <span class="va">myDB</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="st">"/"</span>, <span class="st">"example.gpkg"</span><span class="op">)</span>
@@ -354,6 +354,26 @@
 <span class="co">#&gt; 3      devices            NA       33      7                  &lt;NA&gt;</span>
 <span class="co">#&gt; 4      animals            NA        4      5                  &lt;NA&gt;</span>
 <span class="co">#&gt; 5  deployments            NA       20      6                  &lt;NA&gt;</span></code></pre></div>
+<p>You may notice I forgot to import the activity files. Let’s do that now, as an example of adding an extra layer to an existing database:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">activity_data</span> <span class="op">=</span> <span class="fu"><a href="../reference/read_lotek_activity.html">read_lotek_activity</a></span><span class="op">(</span><span class="va">activity_file</span><span class="op">)</span>
+<span class="fu"><a href="../reference/append_layer.html">append_layer</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">activity_data</span>,
+             dsn <span class="op">=</span> <span class="va">myDB</span>,
+             layer <span class="op">=</span> <span class="st">"activity"</span><span class="op">)</span>
+<span class="co">#&gt; Updating layer `activity' to data source `C:\Users\jweissman\AppData\Local\Temp\1\RtmpKcuAH0\example.gpkg' using driver `GPKG'</span>
+<span class="co">#&gt; Writing 4321 features with 4 fields without geometries.</span>
+
+<span class="co"># a new layer:</span>
+<span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_layers.html" class="external-link">st_layers</a></span><span class="op">(</span><span class="va">myDB</span><span class="op">)</span>
+<span class="co">#&gt; Driver: GPKG </span>
+<span class="co">#&gt; Available layers:</span>
+<span class="co">#&gt;     layer_name geometry_type features fields              crs_name</span>
+<span class="co">#&gt; 1        fixes         Point      468     14 WGS 84 / UTM zone 11N</span>
+<span class="co">#&gt; 2 animal_fixes         Point      462     12 WGS 84 / UTM zone 11N</span>
+<span class="co">#&gt; 3      devices            NA       33      7                  &lt;NA&gt;</span>
+<span class="co">#&gt; 4      animals            NA        4      5                  &lt;NA&gt;</span>
+<span class="co">#&gt; 5  deployments            NA       20      6                  &lt;NA&gt;</span>
+<span class="co">#&gt; 6     activity            NA     4321      4                  &lt;NA&gt;</span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
