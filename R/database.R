@@ -256,21 +256,26 @@ append_layer <- function(data,
                          layer,
                          id_fields = NULL) {
 
-  old_data = sf::st_read(dsn,
-                         layer = layer,
-                         as_tibble = TRUE)
-  # Cannot perform dplyr unions on 2 spatial
-  # dataframes, so convert one to non-spatial:
-  if("sf" %in% class(old_data)) {
-    old_data = sf::st_drop_geometry(old_data)
+  db_layers = sf::st_layers(dsn)$layer_name
+  if ("{{ layer }}" %in%  db_layers) {
+    old_data = sf::st_read(dsn,
+                           layer = {{ layer }},
+                           as_tibble = TRUE)
+    # Cannot perform dplyr unions on 2 spatial
+    # dataframes, so convert one to non-spatial:
+    if("sf" %in% class(old_data)) {
+      old_data = sf::st_drop_geometry(old_data)
+    }
+    data %>%
+      dplyr::anti_join(old_data, by = id_fields) ->
+      new_data
+  } else {
+    new_data = data
   }
-  data %>%
-    dplyr::anti_join(old_data, by = id_fields) ->
-    new_data
 
   sf::st_write(new_data,
                dsn = dsn,
-               layer = layer,
+               layer = {{ layer }},
                append = TRUE)
 }
 
