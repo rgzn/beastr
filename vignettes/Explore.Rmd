@@ -1,8 +1,8 @@
 ---
-title: "Build_DB"
+title: "3. Exploring the Data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Build_DB}
+  %\VignetteIndexEntry{3. Exploring the Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

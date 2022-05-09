@@ -1,8 +1,8 @@
 ---
-title: "QualityControl"
+title: "3. Filter bad data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{QualityControl}
+  %\VignetteIndexEntry{3. Filter bad data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

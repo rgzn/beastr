@@ -232,7 +232,7 @@ fix_file = system.file("lotek/PinPoint33452.txt", package = "beastr")
 device_file = system.file("devices/collars.csv", package = "beastr")
 animal_file = system.file("animals/critters.csv", package = "beastr")
 deploy_file = system.file("deployments/deployments.csv", package = "beastr")
-activity_file = system.file("lotek/activity.txt", package = "beastr")
+activity_file = system.file("lotek/activity33452.csv", package = "beastr")
 
 # Create a path to a geopackage in a temporary directory:
 myDB = paste0(tempdir(check = TRUE), "/", "example.gpkg")
@@ -248,4 +248,18 @@ build_database(fix_files = fix_file,
 # What layers are in there?
 sf::st_layers(myDB)
 ```
+
+
+You may notice I forgot to import the activity files. Let's do that now, as an
+example of adding an extra layer to an existing database:
+
+```{r message=FALSE, warning=FALSE}
+activity_data = read_lotek_activity(activity_file)
+append_layer(data = activity_data, dsn = myDB)
+
+# a new layer: 
+sf::st_layer(myDB)
+
+```
+
 

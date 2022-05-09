@@ -77,7 +77,7 @@ library(ggplot2, quietly = TRUE)
 
 points = sf::st_read(myDB, layer = "animal_fixes")
 #> Reading layer `animal_fixes' from data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpqMtMLo\example.gpkg' 
+#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpklJetu\example.gpkg' 
 #>   using driver `GPKG'
 #> Simple feature collection with 462 features and 12 fields (with 160 geometries empty)
 #> Geometry type: POINT
