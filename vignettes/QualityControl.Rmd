@@ -1,8 +1,8 @@
 ---
-title: "3. Filter bad data"
+title: "2. Filtering Data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{3. Filter bad data}
+  %\VignetteIndexEntry{2. Filtering Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
