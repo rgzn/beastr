@@ -4,7 +4,16 @@
     <loc>https://rgzn.github.io/beastr/404.html</loc>
   </url>
   <url>
+    <loc>https://rgzn.github.io/beastr/articles/a_Introduction.html</loc>
+  </url>
+  <url>
     <loc>https://rgzn.github.io/beastr/articles/Build_DB.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/articles/b_QualityControl.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/articles/c_Explore.html</loc>
   </url>
   <url>
     <loc>https://rgzn.github.io/beastr/articles/Explore.html</loc>
@@ -20,6 +29,9 @@
   </url>
   <url>
     <loc>https://rgzn.github.io/beastr/articles/QualityControl.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/articles/z_LearningR.html</loc>
   </url>
   <url>
     <loc>https://rgzn.github.io/beastr/authors.html</loc>
