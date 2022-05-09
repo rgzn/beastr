@@ -2,11 +2,11 @@ pandoc: 2.11.4
 pkgdown: 2.0.3.9000
 pkgdown_sha: 9dee019f9983b86585a77a3b1a1459b9f0390fe6
 articles:
-  Build_DB: Build_DB.html
+  Explore: Explore.html
   Introduction: Introduction.html
   LearningR: LearningR.html
   QualityControl: QualityControl.html
-last_built: 2022-05-06T23:59Z
+last_built: 2022-05-09T17:02Z
 urls:
   reference: https://rgzn.github.io/beastr/reference
   article: https://rgzn.github.io/beastr/articles
