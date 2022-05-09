@@ -4,10 +4,13 @@
 \alias{get_animal_fixes}
 \title{Get fixes tied to animals rather than devices}
 \usage{
-get_animal_fixes(dsn)
+get_animal_fixes(dsn, animals = NULL)
 }
 \arguments{
 \item{dsn}{Path to database}
+
+\item{animals}{one or more animal_ids. Only get fixes from those ids.
+Defaults to NULL which does not filter any.}
 }
 \value{
 sf POINT collection

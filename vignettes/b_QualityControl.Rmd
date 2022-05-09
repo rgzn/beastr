@@ -1,0 +1,76 @@
+---
+title: "2. Filtering Data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{2. Filtering Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(beastr)
+```
+
+
+## Motivation
+
+_What is "bad" data?_
+
+Before we analyze data, we need to make sure it's not bogus. With GPS telemetry
+we get a lot of questionable data. 
+
+All of the data recorded is useful, so we won't
+remove it outright. For location data, the most common type of bad data is a 
+missed fix. This is where the collar did not find enough satellites to obtain a
+location. This data, however, is still useful. The inability to find satellites
+is not random. It is associated terrain features. It is more likely to find 
+signals on the top of a mountain than the bottom of a canyon. If we were to 
+analyze an animal's habitat use without taking these missed fixes into account, 
+it would be biased towards the tops of ridges and peaks. 
+
+Beside large scale terrain features, this missed data can give us information 
+about microhabitat and animal behavior.
+
+Here's an example:
+
+```{r fig.width=6, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+
+# example database:
+dsn = system.file("db/telemetry.gpkg", package = "beastr")
+
+# first make sure the example data is in the example database:
+
+# Recursing a directory to find lotek fix files:
+fix_files = fs::dir_ls(system.file("lotek/", package = "beastr"),
+                       regexp = "[/\\]PinPoint[ 0-9-]*.txt$",
+                       recurse = TRUE)
+
+# Add those fixes to database:
+append_database(dsn = dsn, 
+                fix_files = fix_files)
+
+# Get points:
+get_animal_fixes(dsn) %>%
+  ggplot(aes(x=temp_c)) +
+  geom_density(aes(fill = fix_status ), binwidth = 1, alpha = 0.7) +
+  ggtitle("Fix Success vs Temp")
+
+```
+
+In this plot, we can see that the missed fixes are highly associated with the 
+collar temperature. This indicates that the animals are resting in spots with 
+poor satellite view. (Higher temperatures indicate the sensor is reading the 
+animal's body rather than the air.)
+
+## Filters
+
+

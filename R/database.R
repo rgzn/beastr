@@ -284,10 +284,19 @@ append_layer <- function(data,
 #'
 #' @details A wrapper for `sf::st_read()`. Helps simplify code.
 #' @param dsn Path to database
+#' @param animals one or more animal_ids. Only get fixes from those ids.
+#' Defaults to NULL which does not filter any.
 #' @importFrom sf st_read
 #' @returns sf POINT collection
 #' @export
-get_animal_fixes <- function(dsn) {
-  sf::st_read(dsn, layer = "animal_fixes")
+get_animal_fixes <- function(dsn,
+                             animals = NULL) {
+  fixes = sf::st_read(dsn, layer = "animal_fixes")
+  if(!is.null(animals)) {
+    fixes %>%
+      filter(animal_id %in% animals) ->
+      fixes
+  }
+  fixes
 }
 
