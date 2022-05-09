@@ -82,7 +82,57 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rgzn.github.io/beastr/">beastr</a></span><span class="op">)</span></code></pre></div>
-  </main>
+<div class="section level2">
+<h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
+</h2>
+<p><em>What is “bad” data?</em></p>
+<p>Before we analyze data, we need to make sure it’s not bogus. With GPS telemetry we get a lot of questionable data.</p>
+<p>All of the data recorded is useful, so we won’t remove it outright. For location data, the most common type of bad data is a missed fix. This is where the collar did not find enough satellites to obtain a location. This data, however, is still useful. The inability to find satellites is not random. It is associated terrain features. It is more likely to find signals on the top of a mountain than the bottom of a canyon. If we were to analyze an animal’s habitat use without taking these missed fixes into account, it would be biased towards the tops of ridges and peaks.</p>
+<p>Beside large scale terrain features, this missed data can give us information about microhabitat and animal behavior.</p>
+<p>Here’s an example:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+
+<span class="co"># example database:</span>
+<span class="va">dsn</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"db/telemetry.gpkg"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
+
+<span class="co"># first make sure the example data is in the example database:</span>
+
+<span class="co"># Recursing a directory to find lotek fix files:</span>
+<span class="va">fix_files</span> <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>,
+                       regexp <span class="op">=</span> <span class="st">"[/\\]PinPoint[ 0-9-]*.txt$"</span>,
+                       recurse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="co"># Add those fixes to database:</span>
+<span class="fu"><a href="../reference/append_database.html">append_database</a></span><span class="op">(</span>dsn <span class="op">=</span> <span class="va">dsn</span>, 
+                fix_files <span class="op">=</span> <span class="va">fix_files</span><span class="op">)</span>
+<span class="co">#&gt; Updating layer `fixes' to data source `C:/Users/jweissman/AppData/Local/Temp/1/RtmpAD8bfh/temp_libpath53f86d145558/beastr/db/telemetry.gpkg' using driver `GPKG'</span>
+<span class="co">#&gt; Updating existing layer fixes</span>
+<span class="co">#&gt; Writing 1456 features with 14 fields and geometry type Point.</span>
+
+<span class="co"># Get points:</span>
+<span class="fu"><a href="../reference/get_animal_fixes.html">get_animal_fixes</a></span><span class="op">(</span><span class="va">dsn</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">temp_c</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">fix_status</span> <span class="op">)</span>, binwidth <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Fix Success vs Temp"</span><span class="op">)</span>
+<span class="co">#&gt; Reading layer `animal_fixes' from data source </span>
+<span class="co">#&gt;   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpAD8bfh\temp_libpath53f86d145558\beastr\db\telemetry.gpkg' </span>
+<span class="co">#&gt;   using driver `GPKG'</span>
+<span class="co">#&gt; Simple feature collection with 10060 features and 12 fields (with 4086 geometries empty)</span>
+<span class="co">#&gt; Geometry type: POINT</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 251017.2 ymin: 4161726 xmax: 305421.4 ymax: 4227265</span>
+<span class="co">#&gt; Projected CRS: WGS 84 / UTM zone 11N</span></code></pre></div>
+<p><img src="b_QualityControl_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
+<p>In this plot, we can see that the missed fixes are highly associated with the collar temperature. This indicates that the animals are resting in spots with poor satellite view. (Higher temperatures indicate the sensor is reading the animal’s body rather than the air.)</p>
+</div>
+<div class="section level2">
+<h2 id="filters">Filters<a class="anchor" aria-label="anchor" href="#filters"></a>
+</h2>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
