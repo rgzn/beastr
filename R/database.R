@@ -230,7 +230,9 @@ append_database <- function(dsn,
   }
   if(!is_null(fix_files)){
     read_lotek(fix_files) %>%
-      append_layer(dsn = dsn, layer = "fixes")
+      append_layer(dsn = dsn,
+                   layer = "fixes",
+                   id_fields = c("device_id", "time"))
   }
 }
 
@@ -256,8 +258,8 @@ append_layer <- function(data,
                          layer,
                          id_fields = NULL) {
 
-  db_layers = sf::st_layers(dsn)$layer_name
-  if ("{{ layer }}" %in%  db_layers) {
+  db_layers = sf::st_layers(dsn)$name
+  if (layer %in%  db_layers) {
     old_data = sf::st_read(dsn,
                            layer = {{ layer }},
                            as_tibble = TRUE)

@@ -71,6 +71,42 @@ collar temperature. This indicates that the animals are resting in spots with
 poor satellite view. (Higher temperatures indicate the sensor is reading the 
 animal's body rather than the air.)
 
+Given that caveat about bad data, missed fixes don't actually have explicity 
+spatial coordinates associated with them. So we will remove them for mapping. 
+
+```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
+library(mapview) 
+
+get_animal_fixes(dsn) %>% 
+  filter(fix_status == "Valid") %>% 
+  mapview(zcol = "animal_id")
+```
+
+You may notice some outlying points. Obviously we have fixes with actual 
+coordinates that still aren't good. How can we remove these?
+
 ## Filters
+
+There are quite a few different measures of how bad a fix is. Some of these come 
+with the data, and some we have to compute ourselves. The most reliable approach 
+is to use multiple measures and filter the data based on thresholds. Picking these
+thresholds is somewhat mystical. Let's take a look at some of them:
+
+### Dilution of Precision
+
+Dilution of Precision (DOP) measures are calculated by the GPS receiver based on
+satellite precision. There are multiple variants. Common ones are horizontal and
+vertical. THe closer together the satellites are in the sky, the les 
+
+Lotek gives us horizontal dilution of precision (hdop).  Let's take a 
+look at the distribution from our example dB:
+
+```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
+get_animal_fixes(dsn) %>% 
+  ggplot(aes(x = hdop)) +
+  geom_histogram() +
+  xlab("hdop, (log scale)") +
+  scale_x_log10()
+```
 
 
