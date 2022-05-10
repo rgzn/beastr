@@ -1,0 +1,21 @@
+m@map %>%
+  leaflet::addTiles(urlTemplate = "https://img.caltopo.com/tile/mbt/{z}/{x}/{y}.png",
+                    layerId = "Mapbuilder Topo",
+                    attribution = '<a href="https://caltopo.com">Caltopo</a>')
+
+leaflet::addTiles(urlTemplate = "https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}",
+                  layerId = "USGS USTopo",
+                  attribution = 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>')
+
+points %>% mapview::mapview() -> m
+
+m@map %>%
+  leaflet::addTiles(urlTemplate = "https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}",
+                    layerId = "USGS USTopo",
+                    attribution = 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>')
+
+
+m@map %>%
+  leaflet::addTiles(urlTemplate = "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}",
+                    layerId = "USGS USImageryTopo",
+                    attribution = 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>')
