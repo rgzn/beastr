@@ -4,22 +4,13 @@
     <loc>https://rgzn.github.io/beastr/404.html</loc>
   </url>
   <url>
-    <loc>https://rgzn.github.io/beastr/articles/a_Introduction.html</loc>
+    <loc>https://rgzn.github.io/beastr/LICENSE.html</loc>
   </url>
   <url>
     <loc>https://rgzn.github.io/beastr/articles/Build_DB.html</loc>
   </url>
   <url>
-    <loc>https://rgzn.github.io/beastr/articles/b_QualityControl.html</loc>
-  </url>
-  <url>
-    <loc>https://rgzn.github.io/beastr/articles/c_Explore.html</loc>
-  </url>
-  <url>
     <loc>https://rgzn.github.io/beastr/articles/Explore.html</loc>
-  </url>
-  <url>
-    <loc>https://rgzn.github.io/beastr/articles/index.html</loc>
   </url>
   <url>
     <loc>https://rgzn.github.io/beastr/articles/Introduction.html</loc>
@@ -31,6 +22,18 @@
     <loc>https://rgzn.github.io/beastr/articles/QualityControl.html</loc>
   </url>
   <url>
+    <loc>https://rgzn.github.io/beastr/articles/a_Introduction.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/articles/b_QualityControl.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/articles/c_Explore.html</loc>
+  </url>
+  <url>
+    <loc>https://rgzn.github.io/beastr/articles/index.html</loc>
+  </url>
+  <url>
     <loc>https://rgzn.github.io/beastr/articles/z_LearningR.html</loc>
   </url>
   <url>
@@ -38,9 +41,6 @@
   </url>
   <url>
     <loc>https://rgzn.github.io/beastr/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rgzn.github.io/beastr/LICENSE.html</loc>
   </url>
   <url>
     <loc>https://rgzn.github.io/beastr/reference/append_database.html</loc>

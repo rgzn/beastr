@@ -126,7 +126,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Example Lotek Telemetry data:</span>
 <span class="va">lotek_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/PinPoint33452.txt"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
-<span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_lines.html" class="external-link">read_lines</a></span><span class="op">(</span><span class="va">lotek_file</span>, n_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_lines.html" class="external-link">read_lines</a></span><span class="op">(</span><span class="va">lotek_file</span>, n_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "Index         Status  Sats  RTC-date  RTC-time  FIX-date      FIX-time   Delta(s)     Latitude    Longitude  Altitude(m)    HDOP        eRes  Temperature(C)  Voltage(V)"</span>
 <span class="co">#&gt;  [2] "    1          Valid   4/4  21/11/23  21:38:46  21/11/23  21:38:47.183      1.183     37.67304   -119.64404      2191.00     2.1         0.2            11.5        3.85"</span>
 <span class="co">#&gt;  [3] "    2          Valid   4/4  21/11/23  21:45:23  21/11/23  21:45:24.383      1.383     37.67314   -119.64399      2191.00     2.3         0.3             8.5        3.85"</span>
@@ -145,32 +145,32 @@
 <span class="co">#&gt; Geometry type: POINT</span>
 <span class="co">#&gt; Dimension:     XY</span>
 <span class="co">#&gt; Bounding box:  xmin: 266812.4 ymin: 4172829 xmax: 266817.1 ymax: 4172840</span>
-<span class="co">#&gt; Projected CRS: WGS 84 / UTM zone 11N</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 x 17</span></span>
+<span class="co">#&gt; CRS:           EPSG:32611</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 17</span></span>
 <span class="co">#&gt;   device_id Index Status       Sats  `RTC-date` `RTC-time` `FIX-date` `FIX-time`</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;time&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;time&gt;</span>    </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 33452         1 Valid        4/4   21/11/23   21<span style="color: #949494;">:</span>38<span style="color: #949494;">:</span>46   21/11/23   21<span style="color: #949494;">:</span>38<span style="color: #949494;">:</span>47  </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 33452         2 Valid        4/4   21/11/23   21<span style="color: #949494;">:</span>45<span style="color: #949494;">:</span>23   21/11/23   21<span style="color: #949494;">:</span>45<span style="color: #949494;">:</span>24  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 33452         3 NotEnoughSa~ 0/1   21/11/23   22<span style="color: #949494;">:</span>00<span style="color: #949494;">:</span>21   <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 33452         4 NotEnoughSa~ 0/2   21/11/23   22<span style="color: #949494;">:</span>11<span style="color: #949494;">:</span>51   <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 33452         5 NotEnoughSa~ 0/0   21/11/23   22<span style="color: #949494;">:</span>15<span style="color: #949494;">:</span>13   <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 33452         6 NotEnoughSa~ 0/0   21/11/23   22<span style="color: #949494;">:</span>35<span style="color: #949494;">:</span>13   <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #949494;"># ... with 9 more variables: `Delta(s)` &lt;dbl&gt;, `Altitude(m)` &lt;dbl&gt;, HDOP &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 33452         3 NotEnoughSa… 0/1   21/11/23   22<span style="color: #949494;">:</span>00<span style="color: #949494;">:</span>21   <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 33452         4 NotEnoughSa… 0/2   21/11/23   22<span style="color: #949494;">:</span>11<span style="color: #949494;">:</span>51   <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 33452         5 NotEnoughSa… 0/0   21/11/23   22<span style="color: #949494;">:</span>15<span style="color: #949494;">:</span>13   <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 33452         6 NotEnoughSa… 0/0   21/11/23   22<span style="color: #949494;">:</span>35<span style="color: #949494;">:</span>13   <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 9 more variables: `Delta(s)` &lt;dbl&gt;, `Altitude(m)` &lt;dbl&gt;, HDOP &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   eRes &lt;dbl&gt;, `Temperature(C)` &lt;dbl&gt;, `Voltage(V)` &lt;dbl&gt;, Ingest_Time &lt;dttm&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   geometry &lt;POINT [m]&gt;, time &lt;dttm&gt;</span></span></code></pre></div>
 <p>Now we have tidy spatial data, and can do spatial manipulation with it.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">lotek_data</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Some Points from a Lotek Collar"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">lotek_data</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Some Points from a Lotek Collar"</span><span class="op">)</span></code></pre></div>
 <p><img src="a_Introduction_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>Telemetry devices may have other sensors as well. An example of this is “activity” data. These records are records from the on-board accelerometer aggregated into a measure called <a href="">Overall Dynamic Body Acceleration (ODBA)</a>. These records are recorded on a different schedule from the GPS fixes, so must be stored separately. Again, Lotek uses a file format that is <em>almost</em> a standard csv, but not quite, so we’ll need to use the function <code><a href="../reference/read_lotek_activity.html">read_lotek_activity()</a></code> from this package:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Starts as 2 columns, switches to 3, doesn't parse:</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/activity33452.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_delim</a></span><span class="op">(</span>delim <span class="op">=</span> <span class="st">","</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span>, n_max <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
+  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_delim.html" class="external-link">read_delim</a></span><span class="op">(</span>delim <span class="op">=</span> <span class="st">","</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span>, n_max <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
 <span class="co">#&gt; Warning: One or more parsing issues, see `problems()` for details</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 x 1</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 1</span></span>
 <span class="co">#&gt;   `Product Type: Litetrack RF-40`</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Product ID: 33452              </span>
@@ -183,7 +183,7 @@
 <span class="co"># Using beastr:</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/activity33452.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/read_lotek_activity.html">read_lotek_activity</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4,321 x 4</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4,321 × 4</span></span>
 <span class="co">#&gt;    device_id time                 ODBA `Temperature [C]`</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 33452     2021-11-23 <span style="color: #949494;">21:40:00</span>   140               8.5</span>
@@ -196,7 +196,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 33452     2021-11-23 <span style="color: #949494;">22:15:00</span>   288              13  </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 33452     2021-11-23 <span style="color: #949494;">22:20:00</span>   405              19.5</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 33452     2021-11-23 <span style="color: #949494;">22:25:00</span>    28              14  </span>
-<span class="co">#&gt; <span style="color: #949494;"># ... with 4,311 more rows</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #949494;"># … with 4,311 more rows</span></span></code></pre></div>
 <p><em>{TODO}</em>: <em>Add support for more input file formats. This can be done as it becomes necessary with new devices. To preserve data, records with different fields for different types of devices should be stored in different tables. The crucial information is joined together into a single <code>VIEW</code> using the <code>deployments</code> table.</em></p>
 <p><strong>Device Data:</strong></p>
 <p>Beyond the data recorded by the telemetry devices, we also want to store information about the devices themselves. This includes things like the serial number, manufacturer, attachment type, etc. This is data tied to a device that does not vary between the individual samples recorded by the device.</p>
@@ -204,16 +204,14 @@
 <p>Here’s what an example looks like:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">device_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"devices/collars.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
-<span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="va">device_file</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">33</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">7</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">--</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">--------------------------------------------------------</span></span>
+<span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="va">device_file</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">33</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">7</span><span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #BB0000;">chr</span> (5): Type, Make, Model, Antenna, Notes</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (2): ID, VHF</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">i</span> Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">i</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 x 7</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 7</span></span>
 <span class="co">#&gt;       ID Type   Make    Model Antenna    VHF Notes</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">33</span>465 collar Lotek   LT40  Internal  169. <span style="color: #BB0000;">NA</span>   </span>
@@ -224,24 +222,22 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Find all CSVs in the device directory:</span>
 <span class="va">device_dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"devices"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
-<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="va">device_dir</span>, regexp <span class="op">=</span> <span class="st">"*.csv"</span>, recurse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; C:/Users/jweissman/AppData/Local/Temp/1/RtmpAD8bfh/temp_libpath53f86d145558/beastr/devices/collars.csv</span></code></pre></div>
+<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/fs/man/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="va">device_dir</span>, regexp <span class="op">=</span> <span class="st">"*.csv"</span>, recurse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; /Library/Frameworks/R.framework/Versions/4.1/Resources/library/beastr/devices/collars.csv</span></code></pre></div>
 <p><strong>Animal Data:</strong></p>
 <p>The whole reason we are doing this is to learn about animals. We need to store information about them! A lot of what we know about the animals does not come from a telemetry device, we need to compile it here.</p>
 <p>Again, this will be one ormore flat CSV/spreadsheets.</p>
 <p>Here’s what an example looks like, this time we’re reading multiple files in:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">animal_dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"animals"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
-<span class="va">animal_files</span> <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="va">animal_dir</span>, regexp <span class="op">=</span> <span class="st">"*.csv"</span>, recurse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="va">animal_files</span><span class="op">)</span> 
-<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">18</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">5</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">--</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">--------------------------------------------------------</span></span>
+<span class="va">animal_files</span> <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/fs/man/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="va">animal_dir</span>, regexp <span class="op">=</span> <span class="st">"*.csv"</span>, recurse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="va">animal_files</span><span class="op">)</span> 
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">18</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">5</span><span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #BB0000;">chr</span> (5): ID, AgeClass, GeneralArea, Sex, Species</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">i</span> Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">i</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 x 5</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 5</span></span>
 <span class="co">#&gt;    ID    AgeClass GeneralArea      Sex   Species</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> MF01  Adult    Elevenmile       F     PEPE   </span>
@@ -267,17 +263,15 @@
 <p>Example:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deploy_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"deployments/deployments.csv"</span>, package <span class="op">=</span> <span class="st">"beastr"</span><span class="op">)</span>
-<span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="va">deploy_file</span><span class="op">)</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">20</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">--</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">--------------------------------------------------------</span></span>
+<span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="va">deploy_file</span><span class="op">)</span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">20</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span><span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #BB0000;">chr</span>  (3): AnimalID, Start_Method, Stop_Method</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span>  (1): DeviceID</span>
 <span class="co">#&gt; <span style="color: #0000BB;">dttm</span> (2): In_Service, Out_Service</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">i</span> Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">i</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 x 6</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 6</span></span>
 <span class="co">#&gt;    DeviceID AnimalID In_Service          Out_Service         Start_Method</span>
 <span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    <span style="text-decoration: underline;">33</span>468 MM02     2021-10-17 <span style="color: #949494;">15:35:00</span> <span style="color: #BB0000;">NA</span>                  capture     </span>
@@ -300,7 +294,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">18</span>   <span style="text-decoration: underline;">259</span>186 MF04     2022-03-02 <span style="color: #949494;">13:08:00</span> <span style="color: #BB0000;">NA</span>                  capture     </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">19</span>    <span style="text-decoration: underline;">33</span>983 MM08     2022-03-05 <span style="color: #949494;">14:16:00</span> <span style="color: #BB0000;">NA</span>                  capture     </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">20</span>    <span style="text-decoration: underline;">33</span>984 MM11     2022-03-07 <span style="color: #949494;">13:28:00</span> <span style="color: #BB0000;">NA</span>                  capture     </span>
-<span class="co">#&gt; <span style="color: #949494;"># ... with 1 more variable: Stop_Method &lt;chr&gt;</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: Stop_Method &lt;chr&gt;</span></span></code></pre></div>
 <p><em>{TODO}</em>: <em>Need to add a non-animal deployment table for environmental and ambient devices. This should be a spatial table.</em></p>
 <p><em>Some telemetry devices may record environmental data (such as weather stations) or ambient data (like Acoustic Recording Units), and are not tied to a specific animal. [NOT YET IMPLEMENTED]</em></p>
 </div>
@@ -326,15 +320,13 @@
                deployment_files <span class="op">=</span> <span class="va">deploy_file</span>,
                dsn <span class="op">=</span> <span class="va">myDB</span>,
                tz <span class="op">=</span> <span class="st">"US/Pacific"</span><span class="op">)</span>
-<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">20</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span>
-<span class="co">#&gt; <span style="color: #00BBBB;">--</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">--------------------------------------------------------</span></span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">20</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span><span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
 <span class="co">#&gt; <span style="color: #BB0000;">chr</span>  (3): AnimalID, Start_Method, Stop_Method</span>
 <span class="co">#&gt; <span style="color: #00BB00;">dbl</span>  (1): DeviceID</span>
 <span class="co">#&gt; <span style="color: #0000BB;">dttm</span> (2): In_Service, Out_Service</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">i</span> Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">i</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; Warning in clean_columns(as.data.frame(obj), factorsAsCharacter): Dropping</span>
 <span class="co">#&gt; column(s) RTC-time,FIX-time of class(es) hms;difftime,hms;difftime</span>
 <span class="co">#&gt; Warning: Missing values are always removed in SQL.</span>
@@ -348,32 +340,32 @@
 <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_layers.html" class="external-link">st_layers</a></span><span class="op">(</span><span class="va">myDB</span><span class="op">)</span>
 <span class="co">#&gt; Driver: GPKG </span>
 <span class="co">#&gt; Available layers:</span>
-<span class="co">#&gt;     layer_name geometry_type features fields              crs_name</span>
-<span class="co">#&gt; 1        fixes         Point      468     14 WGS 84 / UTM zone 11N</span>
-<span class="co">#&gt; 2 animal_fixes         Point      462     12 WGS 84 / UTM zone 11N</span>
-<span class="co">#&gt; 3      devices            NA       33      7                  &lt;NA&gt;</span>
-<span class="co">#&gt; 4      animals            NA        4      5                  &lt;NA&gt;</span>
-<span class="co">#&gt; 5  deployments            NA       20      6                  &lt;NA&gt;</span></code></pre></div>
+<span class="co">#&gt;     layer_name geometry_type features fields crs_name</span>
+<span class="co">#&gt; 1        fixes         Point      468     14    32611</span>
+<span class="co">#&gt; 2 animal_fixes         Point      462     12    32611</span>
+<span class="co">#&gt; 3      devices            NA       33      7     &lt;NA&gt;</span>
+<span class="co">#&gt; 4      animals            NA        4      5     &lt;NA&gt;</span>
+<span class="co">#&gt; 5  deployments            NA       20      6     &lt;NA&gt;</span></code></pre></div>
 <p>You may notice I forgot to import the activity files. Let’s do that now, as an example of adding an extra layer to an existing database:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">activity_data</span> <span class="op">=</span> <span class="fu"><a href="../reference/read_lotek_activity.html">read_lotek_activity</a></span><span class="op">(</span><span class="va">activity_file</span><span class="op">)</span>
 <span class="fu"><a href="../reference/append_layer.html">append_layer</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">activity_data</span>,
              dsn <span class="op">=</span> <span class="va">myDB</span>,
              layer <span class="op">=</span> <span class="st">"activity"</span><span class="op">)</span>
-<span class="co">#&gt; Updating layer `activity' to data source `C:\Users\jweissman\AppData\Local\Temp\1\RtmpUVXsBA\example.gpkg' using driver `GPKG'</span>
+<span class="co">#&gt; Updating layer `activity' to data source `/var/folders/q2/53ffh3110_5fqqp7tmq2s5th0000gn/T//RtmpufftnQ/example.gpkg' using driver `GPKG'</span>
 <span class="co">#&gt; Writing 4321 features with 4 fields without geometries.</span>
 
 <span class="co"># a new layer:</span>
 <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_layers.html" class="external-link">st_layers</a></span><span class="op">(</span><span class="va">myDB</span><span class="op">)</span>
 <span class="co">#&gt; Driver: GPKG </span>
 <span class="co">#&gt; Available layers:</span>
-<span class="co">#&gt;     layer_name geometry_type features fields              crs_name</span>
-<span class="co">#&gt; 1        fixes         Point      468     14 WGS 84 / UTM zone 11N</span>
-<span class="co">#&gt; 2 animal_fixes         Point      462     12 WGS 84 / UTM zone 11N</span>
-<span class="co">#&gt; 3      devices            NA       33      7                  &lt;NA&gt;</span>
-<span class="co">#&gt; 4      animals            NA        4      5                  &lt;NA&gt;</span>
-<span class="co">#&gt; 5  deployments            NA       20      6                  &lt;NA&gt;</span>
-<span class="co">#&gt; 6     activity            NA     4321      4                  &lt;NA&gt;</span></code></pre></div>
+<span class="co">#&gt;     layer_name geometry_type features fields crs_name</span>
+<span class="co">#&gt; 1        fixes         Point      468     14    32611</span>
+<span class="co">#&gt; 2 animal_fixes         Point      462     12    32611</span>
+<span class="co">#&gt; 3      devices            NA       33      7     &lt;NA&gt;</span>
+<span class="co">#&gt; 4      animals            NA        4      5     &lt;NA&gt;</span>
+<span class="co">#&gt; 5  deployments            NA       20      6     &lt;NA&gt;</span>
+<span class="co">#&gt; 6     activity            NA     4321      4     &lt;NA&gt;</span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -388,7 +380,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>

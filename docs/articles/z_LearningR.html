@@ -89,9 +89,27 @@
 <p>Do you want to learn R?</p>
 <p>If you have little to no coding experience and want to get started, or are new to R and data processing, this online book is great:</p>
 <p><strong>Statistical Inference via Data Science</strong> <a href="https://moderndive.com/1-getting-started.html" class="external-link uri">https://moderndive.com/1-getting-started.html</a></p>
+<p><strong>Tips on learning to code</strong> <a href="https://moderndive.com/1-getting-started.html#tips-code" class="external-link uri">https://moderndive.com/1-getting-started.html#tips-code</a></p>
+<!-- > ^learning to code goes much smoother ... when you are working on a particular project, like analyzing data that you are interested in and that is important to you.^ -->
 <p>If you have are kinda familiar with code, or have even coded in old school base R extensively, but are new to tidy R or data science with R, <a href="https://github.com/hadley" class="external-link">Hadley’s</a> book is the definitive guide to analyzing data with R:</p>
 <p><strong>R for Data Science</strong> <a href="https://r4ds.had.co.nz/index.html" class="external-link uri">https://r4ds.had.co.nz/index.html</a></p>
 <p>Both of these resources are listed on the <a href="https://www.tidyverse.org/learn/" class="external-link">tidyverse</a> website.</p>
+<p>Once you’ve started using these, you’ll quickly need more reference info on tidyverse tools. Thankfully, these are extremely well documented with vignettes and examples. Many of the most commonly used data manipulation functions come from the package <code>dplyr</code>:</p>
+<p><strong>Introduction to dplyr</strong> <a href="https://dplyr.tidyverse.org/articles/dplyr.html" class="external-link uri">https://dplyr.tidyverse.org/articles/dplyr.html</a></p>
+<p>You’ll also want to plot data, and hence learn <code>ggplot2</code>:</p>
+<p><strong>Learning ggplot2</strong> <a href="https://ggplot2.tidyverse.org/#learning-ggplot2" class="external-link uri">https://ggplot2.tidyverse.org/#learning-ggplot2</a></p>
+<p>If you want to get started plotting quickly, you can find what you need here:</p>
+<p><strong>R Graphics Cookbook</strong> <a href="https://r-graphics.org/" class="external-link uri">https://r-graphics.org/</a></p>
+<p>Now that you’re writing code, you are aren’t going to want to stop and read books every time you need to look up how to do something. I don’t even know how to read anymore. One of the best things about modern R tools are the cheat sheets. Here is a centralized collection:</p>
+<p><strong>RStudio Cheatsheets</strong> <a href="https://www.rstudio.com/resources/cheatsheets/" class="external-link uri">https://www.rstudio.com/resources/cheatsheets/</a></p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="style">Style<a class="anchor" aria-label="anchor" href="#style"></a>
+</h2>
+<p>Writing code is not just about building a machine that processes data. Especially for scientific data analysis, code is also a precise description of your methodology. If others can read it, they can learn exactly what you did with your data. The challenge is making your code readable.</p>
+<p>This is a major motivation behind using tidy data and tidyverse functions, but these won’t save you from writing unreadable code. You have infinite choices in naming and formatting things. For legibility and consistency, try to adhere to:</p>
+<p><strong>The tidyverse style guide</strong> <a href="https://style.tidyverse.org/" class="external-link uri">https://style.tidyverse.org/</a></p>
 <hr>
 </div>
 <div class="section level2">
@@ -124,11 +142,28 @@
 <hr>
 </div>
 <div class="section level2">
-<h2 id="spatial-data">Spatial Data:<a class="anchor" aria-label="anchor" href="#spatial-data"></a>
+<h2 id="spatial-data">Spatial Data<a class="anchor" aria-label="anchor" href="#spatial-data"></a>
 </h2>
 <p>Do you want to make maps? Do spatial statistics? Explore movements?</p>
-<p>I just found this text by <a href="https://github.com/chiajung-yeh" class="external-link">Yeh Chia Jung</a>, but it looks really nice. It’s basically and in-depth how to on using the <code>sf</code> package. It illustrates how to use <code>ggplot</code> in combination with spatial data, and also explains what goes into making data spatial.</p>
+<p>Spatial data comes in two forms: Vector and Raster.</p>
+<ul>
+<li>Vector: This is data associated with precise coordinates. Think points, lines, gps fixes, roads.</li>
+<li>Raster: This is gridded data that is mapped to a spatial surface. The data is in images, and each pixel of that image covers a general area rather than precise coordinates. Think satellite imagery or elevation models.</li>
+</ul>
+<p>For vector data, you will want to use <code>sf</code>:</p>
+<p><strong>Simple Features for R</strong> <a href="https://r-spatial.github.io/sf/" class="external-link uri">https://r-spatial.github.io/sf/</a></p>
+<p>This is an R package, not a book. However, like many good R packages, it has excellent documentation in the <em>Articles</em> or <em>vignettes</em>.</p>
+<p><code>sf</code> is at the heart of all the code I’ve written to process telemetry data. I can’t recommend it enough, and <a href="https://github.com/edzer" class="external-link">Edzer</a> is the most responsive developer I’ve encountered.</p>
+<p>For more info on how to use <code>sf</code>:</p>
 <p><strong>Spatial Analysis with R</strong> <a href="https://chiajung-yeh.github.io/Spatial-Analysis/" class="external-link uri">https://chiajung-yeh.github.io/Spatial-Analysis/</a></p>
+<p>This text by <a href="https://github.com/chiajung-yeh" class="external-link">Yeh Chia Jung</a> looks nice. It’s basically an in-depth demo using the <code>sf</code> package. It illustrates how to use <code>ggplot</code> in combination with spatial data, and also explains what goes into making data spatial.</p>
+<p>For raster data, the corresponding package is <code>stars</code>:</p>
+<p><strong>Spatiotemporal Arrays: Raster and Vector Datacubes</strong> (<a href="https://r-spatial.github.io/stars/" class="external-link uri">https://r-spatial.github.io/stars/</a>)</p>
+<p>However, this is a younger package and has a strong competitor in <a href="https://rspatial.org/terra/pkg/index.html" class="external-link"><code>terra</code></a>, which I haven’t used but I know is popular.</p>
+<p>More info:</p>
+<p>The underlying libraries driving all of these spatial data tools come from <a href="https://www.osgeo.org/partners/ogc/" class="external-link">Open Geospatial Consortium</a>. These tools, like <a href="https://gdal.org/" class="external-link">GDAL</a> and <a href="https://proj.org/" class="external-link">PROJ</a> also power software like <a href="https://www.qgis.org/en/site/" class="external-link">QGIS</a> and <a href="https://postgis.net/" class="external-link">PostGIS</a>.</p>
+<p>The good thing about that is that it’s easy to exchange data between any of these tools, and often an analysis done in one can be easily replicated in another. For example, I’ve often done something using the QGIS graphical interface, and then once I’ve figured out what I wanted, copied the steps over into R or Python using the same underlying GDAL library.</p>
+<p>Unfortunately, ESRI does its own thing and often doesn’t play well with OGC tools.</p>
 <hr>
 </div>
 <div class="section level2">
@@ -163,7 +198,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>
