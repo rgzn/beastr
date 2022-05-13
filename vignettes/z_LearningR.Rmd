@@ -35,6 +35,13 @@ new to R and data processing, this online book is great:
 __Statistical Inference via Data Science__
 https://moderndive.com/1-getting-started.html
 
+__Tips on learning to code__
+https://moderndive.com/1-getting-started.html#tips-code
+
+
+<!-- > ^learning to code goes much smoother ... when you are working on a particular project, like analyzing data that you are interested in and that is important to you.^ -->
+
+
 If you have are kinda familiar with code, or have even coded in old school 
 base R extensively, but are new to tidy R or data science with R, 
 [Hadley's](https://github.com/hadley) book is the definitive 
@@ -47,7 +54,51 @@ https://r4ds.had.co.nz/index.html
 Both of these resources are listed on the 
 [tidyverse](https://www.tidyverse.org/learn/) website.
 
+Once you've started using these, you'll quickly need more reference info on 
+tidyverse tools. Thankfully, these are extremely well documented with vignettes
+and examples. Many of the most commonly used data manipulation functions come
+from the package `dplyr`:
+
+__Introduction to dplyr__ 
+https://dplyr.tidyverse.org/articles/dplyr.html
+
+You'll also want to plot data, and hence learn `ggplot2`:
+
+__Learning ggplot2__ 
+https://ggplot2.tidyverse.org/#learning-ggplot2
+
+If you want to get started plotting quickly, you can find what you need here:
+
+__R Graphics Cookbook__ 
+https://r-graphics.org/
+
+
+Now that you're writing code, you are aren't going to want to stop and read 
+books every time you need to look up how to do something. I don't even know how 
+to read anymore. One of the best things
+about modern R tools are the cheat sheets. Here is a centralized collection:
+
+__RStudio Cheatsheets__ 
+https://www.rstudio.com/resources/cheatsheets/
+
 _________________
+
+## Style 
+
+Writing code is not just about building a machine that processes data. 
+Especially for scientific data analysis, code is also a precise description 
+of your methodology. If others can read it, they can learn exactly what you did 
+with your data. The challenge is making your code readable. 
+
+This is a major motivation behind using tidy data and tidyverse functions, but
+these won't save you from writing unreadable code. You have infinite choices in 
+naming and formatting things. For legibility and consistency, try to adhere to:
+
+__The tidyverse style guide__ 
+https://style.tidyverse.org/
+
+_________________
+
 
 ## Statistics:
 
@@ -91,18 +142,66 @@ statistics education than the majority of professional data scientists.
   
 _________________
 
-## Spatial Data: 
+## Spatial Data
 
 Do you want to make maps? Do spatial statistics? Explore movements?
 
-I just found this text by [Yeh Chia Jung](https://github.com/chiajung-yeh), 
-but it looks really nice. 
-It's basically and in-depth how to on using the `sf` package. 
-It illustrates how to use `ggplot` in combination with spatial data, and also 
-explains what goes into making data spatial. 
+Spatial data comes in two forms: Vector and Raster. 
+  
+  - Vector: This is data associated with precise coordinates. Think points, 
+  lines, gps fixes, roads. 
+  - Raster: This is gridded data that is mapped to a spatial surface. The data
+  is in images, and each pixel of that image covers a general area rather than 
+  precise coordinates. Think satellite imagery or elevation models.
+  
+For vector data, you will want to use `sf`:
+
+__Simple Features for R__
+https://r-spatial.github.io/sf/
+
+This is an R package, not a book. However, like many good R packages, it has
+excellent documentation in the _Articles_ or _vignettes_. 
+
+`sf` is at the heart of all the code I've written to process telemetry data. 
+I can't recommend it enough, and [Edzer](https://github.com/edzer) is the most
+responsive developer I've encountered. 
+
+For more info on how to use `sf`:    
 
 __Spatial Analysis with R__
 https://chiajung-yeh.github.io/Spatial-Analysis/
+
+This text by [Yeh Chia Jung](https://github.com/chiajung-yeh) looks nice. 
+It's basically an in-depth demo using the `sf` package. 
+It illustrates how to use `ggplot` in combination with spatial data, and also 
+explains what goes into making data spatial. 
+
+
+For raster data, the corresponding package is `stars`:
+
+__Spatiotemporal Arrays: Raster and Vector Datacubes__
+(https://r-spatial.github.io/stars/)
+
+However, this is a younger package and has a strong competitor in 
+[`terra`](https://rspatial.org/terra/pkg/index.html), which I haven't used but I
+know is popular.
+
+More info: 
+
+The underlying libraries driving all of these spatial data tools come from 
+[Open Geospatial Consortium](https://www.osgeo.org/partners/ogc/).
+These tools, like [GDAL](https://gdal.org/) and [PROJ](https://proj.org/) also
+power software like [QGIS](https://www.qgis.org/en/site/) and 
+[PostGIS](https://postgis.net/). 
+
+The good thing about that is that it's easy to exchange data between any of 
+these tools, and often an analysis done in one can be easily replicated in 
+another. For example, I've often done something using the QGIS graphical 
+interface, and then once I've figured out what I wanted, copied the steps over
+into R or Python using the same underlying GDAL library. 
+
+Unfortunately, ESRI does its own thing and often doesn't play well with OGC 
+tools. 
 
 _________________  
   
