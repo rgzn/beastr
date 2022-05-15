@@ -34,6 +34,7 @@ Suggests:
     ggplot2,
     mapview,
     leafem,
+    leaflet.providers,
     rmarkdown,
     testthat (>= 3.0.0),
     DT

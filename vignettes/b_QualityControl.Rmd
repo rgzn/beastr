@@ -76,10 +76,16 @@ spatial coordinates associated with them. So we will remove them for mapping.
 
 ```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
 library(mapview) 
+library(leaflet)
+library(leaflet.providers)
 
 get_animal_fixes(dsn) %>% 
   filter(fix_status == "Valid") %>% 
-  mapview(zcol = "animal_id")
+  mapview(zcol = "animal_id") -> 
+  m
+
+m
+
 ```
 
 You may notice some outlying points. Obviously we have fixes with actual 
@@ -104,9 +110,46 @@ look at the distribution from our example dB:
 ```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
 get_animal_fixes(dsn) %>% 
   ggplot(aes(x = hdop)) +
-  geom_histogram() +
+  geom_histogram(binwidth = 0.1) +
   xlab("hdop, (log scale)") +
   scale_x_log10()
 ```
 
+Here we can see that most of the HDOP values are under 10. The ones above 10 are likely to have a high error. 
+We obviously don't have a way to directly measure error for each of these points, but we can get an indication that hdop is associated with error by looking at displacement. In this case we can define displacement at the distance from the mean point. If high HDOP points tend to have high displacement, that's a good indication that it is associated with error. Let's take a look:
 
+```{r message=FALSE, warning=FALSE}
+# load sf for spatial processing:
+library(sf)
+
+# calculate mean points per animal:
+get_animal_fixes(dsn) %>% 
+  group_by(animal_id) %>% 
+  summarise(geom = sf::st_union(geom)) %>% 
+  mutate(centroid = st_centroid(geom)) %>% 
+  st_drop_geometry() ->
+  animal_centroids
+
+# calculate displacement for each point
+get_animal_fixes(dsn) %>% 
+  filter(fix_status == "Valid") %>% 
+  left_join(animal_centroids) %>% 
+  mutate(disp = st_distance(geom, centroid, by_element = TRUE)) ->
+  fixes_w_displacement
+
+# log scales:
+fixes_w_displacement %>% 
+  mutate(disp = as.numeric(disp)) %>% 
+  ggplot(aes(x = disp, y = hdop)) + 
+  geom_point(alpha = 0.5) + 
+  scale_x_log10() + 
+  scale_y_log10()
+```
+
+This is interesting because we see a natural boundary in displaement. This is at roughly 8km, so that makes sense for an animal (fisher in this case) staying within a typical home range. There are two distinct features of this plot to notice: 
+
+  - Nearly all the points with displacement outside the typical homerange have high HDOP. These are almost certainly bad points. Points that we could probably tell are bad just from the map. 
+  - There are, however, still many points within the typical displacements that have similarly high HDOP. These are the reason we need these data filters beyond just looking at the map and throwing away points that look absurd. These points might look normal on a map but are still probably bad. 
+  
+  
+From this plot, I would use the points in the upper right sector to pick an ad-hoc cutoff for HDOP. Probably ~100. It's better to be conservative and not throw away too many points. That's why we'll apply multiple filters to narrow down other bad fixes.

@@ -95,9 +95,47 @@ in the output</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">points</span> <span class="op">=</span> <span class="fu">read_lotek</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"lotek/PinPoint33452.txt"</span>, package<span class="op">=</span><span class="st">"beastr"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in readr::read_fwf(filename, n_max = 1, show_col_types = show_col_types):</span> unused argument (show_col_types = show_col_types)</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">points</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in object[[i]]:</span> object of type 'closure' is not subsettable</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   device_id             Index          Status              Sats          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Length:468         Min.   :  1.0   Length:468         Length:468        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character   1st Qu.:117.8   Class :character   Class :character  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mode  :character   Median :234.5   Mode  :character   Mode  :character  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     Mean   :234.5                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     3rd Qu.:351.2                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     Max.   :468.0                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    RTC-date           RTC-time          FIX-date           FIX-time       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Length:468         Length:468        Length:468         Length:468       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character   Class1:hms        Class :character   Class1:hms       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mode  :character   Class2:difftime   Mode  :character   Class2:difftime  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     Mode  :numeric                       Mode  :numeric   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Delta(s)       Altitude(m)        HDOP              eRes       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :-8.321   Min.   :1306   Min.   :  1.100   Min.   :0.0000  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:-2.788   1st Qu.:1856   1st Qu.:  1.975   1st Qu.:0.1000  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :-1.806   Median :2153   Median :  3.000   Median :0.3000  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :-1.862   Mean   :2018   Mean   :  7.805   Mean   :0.7391  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:-1.013   3rd Qu.:2190   3rd Qu.:  5.575   3rd Qu.:1.0000  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   : 1.412   Max.   :2271   Max.   :285.000   Max.   :5.6000  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   NA's   :164    NA's   :164       NA's   :164     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Temperature(C)    Voltage(V)     Ingest_Time                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   : 0.00   Min.   :3.750   Min.   :2022-05-10 09:00:37  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:16.50   1st Qu.:3.800   1st Qu.:2022-05-10 09:00:37  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :20.50   Median :3.800   Median :2022-05-10 09:00:37  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :22.57   Mean   :3.821   Mean   :2022-05-10 09:00:37  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:32.00   3rd Qu.:3.850   3rd Qu.:2022-05-10 09:00:37  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :38.00   Max.   :3.850   Max.   :2022-05-10 09:00:37  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           geometry        time                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  POINT        :468   Min.   :2021-11-23 21:38:46  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  epsg:32611   :  0   1st Qu.:2021-11-26 16:41:47  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  +proj=utm ...:  0   Median :2021-11-28 22:08:06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      Mean   :2021-11-29 01:05:06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      3rd Qu.:2021-11-30 22:19:23  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      Max.   :2021-12-08 21:00:16  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                   </span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
