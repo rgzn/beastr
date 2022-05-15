@@ -26,6 +26,12 @@ You can install the package using the
 devtools::install_github('rgzn/beastr')
 ```
 
+## Details
+
+For more details see the articles/vignettes on this package. In
+particular, the [Introduction](docs/articles/a_Introduction.html) will
+explain what data this deals with and why.
+
 ## Example
 
 Build your database:
@@ -53,12 +59,12 @@ build_database(fix_files = fix_file,
 sf::st_layers(myDB)
 #> Driver: GPKG 
 #> Available layers:
-#>     layer_name geometry_type features fields              crs_name
-#> 1        fixes         Point      468     14 WGS 84 / UTM zone 11N
-#> 2 animal_fixes         Point      462     12 WGS 84 / UTM zone 11N
-#> 3      devices            NA       33      7                  <NA>
-#> 4      animals            NA        4      5                  <NA>
-#> 5  deployments            NA       20      6                  <NA>
+#>     layer_name geometry_type features fields crs_name
+#> 1        fixes         Point      468     14    32611
+#> 2 animal_fixes         Point      462     12    32611
+#> 3      devices            NA       33      7     <NA>
+#> 4      animals            NA        4      5     <NA>
+#> 5  deployments            NA       20      6     <NA>
 ```
 
 View data linked to animals, rather than sensors:
@@ -77,13 +83,13 @@ library(ggplot2, quietly = TRUE)
 
 points = sf::st_read(myDB, layer = "animal_fixes")
 #> Reading layer `animal_fixes' from data source 
-#>   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpklJetu\example.gpkg' 
+#>   `/private/var/folders/q2/53ffh3110_5fqqp7tmq2s5th0000gn/T/RtmpEWw7vr/example.gpkg' 
 #>   using driver `GPKG'
 #> Simple feature collection with 462 features and 12 fields (with 160 geometries empty)
 #> Geometry type: POINT
 #> Dimension:     XY
 #> Bounding box:  xmin: 261780.2 ymin: 4173114 xmax: 267257.4 ymax: 4178607
-#> Projected CRS: WGS 84 / UTM zone 11N
+#> CRS:           32611
 
 points %>% 
   ggplot2::ggplot() + 
