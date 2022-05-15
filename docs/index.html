@@ -88,6 +88,11 @@
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'rgzn/beastr'</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
+</h2>
+<p>For more details see the articles/vignettes on this package. In particular, the <a href="articles/a_Introduction.html">Introduction</a> will explain what data this deals with and why.</p>
+</div>
+<div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>Build your database:</p>
@@ -114,12 +119,12 @@
 <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_layers.html" class="external-link">st_layers</a></span><span class="op">(</span><span class="va">myDB</span><span class="op">)</span>
 <span class="co">#&gt; Driver: GPKG </span>
 <span class="co">#&gt; Available layers:</span>
-<span class="co">#&gt;     layer_name geometry_type features fields              crs_name</span>
-<span class="co">#&gt; 1        fixes         Point      468     14 WGS 84 / UTM zone 11N</span>
-<span class="co">#&gt; 2 animal_fixes         Point      462     12 WGS 84 / UTM zone 11N</span>
-<span class="co">#&gt; 3      devices            NA       33      7                  &lt;NA&gt;</span>
-<span class="co">#&gt; 4      animals            NA        4      5                  &lt;NA&gt;</span>
-<span class="co">#&gt; 5  deployments            NA       20      6                  &lt;NA&gt;</span></code></pre></div>
+<span class="co">#&gt;     layer_name geometry_type features fields crs_name</span>
+<span class="co">#&gt; 1        fixes         Point      468     14    32611</span>
+<span class="co">#&gt; 2 animal_fixes         Point      462     12    32611</span>
+<span class="co">#&gt; 3      devices            NA       33      7     &lt;NA&gt;</span>
+<span class="co">#&gt; 4      animals            NA        4      5     &lt;NA&gt;</span>
+<span class="co">#&gt; 5  deployments            NA       20      6     &lt;NA&gt;</span></code></pre></div>
 <p>View data linked to animals, rather than sensors:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -135,13 +140,13 @@
 
 <span class="va">points</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="va">myDB</span>, layer <span class="op">=</span> <span class="st">"animal_fixes"</span><span class="op">)</span>
 <span class="co">#&gt; Reading layer `animal_fixes' from data source </span>
-<span class="co">#&gt;   `C:\Users\jweissman\AppData\Local\Temp\1\RtmpklJetu\example.gpkg' </span>
+<span class="co">#&gt;   `/private/var/folders/q2/53ffh3110_5fqqp7tmq2s5th0000gn/T/Rtmp3rOe53/example.gpkg' </span>
 <span class="co">#&gt;   using driver `GPKG'</span>
 <span class="co">#&gt; Simple feature collection with 462 features and 12 fields (with 160 geometries empty)</span>
 <span class="co">#&gt; Geometry type: POINT</span>
 <span class="co">#&gt; Dimension:     XY</span>
 <span class="co">#&gt; Bounding box:  xmin: 261780.2 ymin: 4173114 xmax: 267257.4 ymax: 4178607</span>
-<span class="co">#&gt; Projected CRS: WGS 84 / UTM zone 11N</span>
+<span class="co">#&gt; CRS:           32611</span>
 
 <span class="va">points</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 

@@ -29,7 +29,7 @@ devtools::install_github('rgzn/beastr')
 ## Details
 
 For more details see the articles/vignettes on this package. In
-particular, the [Introduction](docs/articles/a_Introduction.html) will
+particular, the [Introduction](articles/a_Introduction.html) will
 explain what data this deals with and why.
 
 ## Example
@@ -83,7 +83,7 @@ library(ggplot2, quietly = TRUE)
 
 points = sf::st_read(myDB, layer = "animal_fixes")
 #> Reading layer `animal_fixes' from data source 
-#>   `/private/var/folders/q2/53ffh3110_5fqqp7tmq2s5th0000gn/T/RtmpEWw7vr/example.gpkg' 
+#>   `/private/var/folders/q2/53ffh3110_5fqqp7tmq2s5th0000gn/T/Rtmp3rOe53/example.gpkg' 
 #>   using driver `GPKG'
 #> Simple feature collection with 462 features and 12 fields (with 160 geometries empty)
 #> Geometry type: POINT

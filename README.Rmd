@@ -37,7 +37,7 @@ devtools::install_github('rgzn/beastr')
 ## Details
 
 For more details see the articles/vignettes on this package. In particular, 
-the [Introduction](docs/articles/a_Introduction.html) will explain what data this deals with and why. 
+the [Introduction](articles/a_Introduction.html) will explain what data this deals with and why. 
 
 ## Example
 
