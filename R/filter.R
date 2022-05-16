@@ -174,9 +174,9 @@ get_elevation_difference <- function(df,
                                      dem_src,
                                      elev_field = elevation_gps,
                                      geom_field = geom) {
-  elev_field_1 = enquo(elev_field_1)
+  elev_field = enquo(elev_field)
 
   df %>%
     get_elevation_dem(dem_src = dem_src) %>%
-    dplyr::mutate(elevation_dif = !!elev_field_1 - elevation_dem)
+    dplyr::mutate(elevation_dif = !!elev_field - elevation_dem)
 }
