@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(beastr)
+library(dplyr)
 ```
 
 
@@ -42,7 +43,6 @@ Here's an example:
 
 ```{r fig.width=6, message=FALSE, warning=FALSE}
 library(ggplot2)
-library(dplyr)
 
 # example database:
 dsn = system.file("db/telemetry.gpkg", package = "beastr")
@@ -146,10 +146,71 @@ fixes_w_displacement %>%
   scale_y_log10()
 ```
 
-This is interesting because we see a natural boundary in displaement. This is at roughly 8km, so that makes sense for an animal (fisher in this case) staying within a typical home range. There are two distinct features of this plot to notice: 
+This is interesting because we see a natural boundary in displacement. This is at roughly 8km, so that makes sense for an animal (fisher in this case) staying within a typical home range. There are two distinct features of this plot to notice: 
 
   - Nearly all the points with displacement outside the typical homerange have high HDOP. These are almost certainly bad points. Points that we could probably tell are bad just from the map. 
   - There are, however, still many points within the typical displacements that have similarly high HDOP. These are the reason we need these data filters beyond just looking at the map and throwing away points that look absurd. These points might look normal on a map but are still probably bad. 
   
   
-From this plot, I would use the points in the upper right sector to pick an ad-hoc cutoff for HDOP. Probably ~100. It's better to be conservative and not throw away too many points. That's why we'll apply multiple filters to narrow down other bad fixes.
+From this plot, I would use the points in the upper right sector to pick an ad-hoc cutoff for HDOP. Probably ~100. It's better to be conservative and not throw away too many points. That's why we'll apply multiple filters to narrow down other bad fixes. But first let's see the data after filtering on HDOP:
+
+```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
+get_animal_fixes(dsn) %>% 
+  dplyr::filter(hdop < 100) %>% 
+  mapview()
+```
+
+### Elevation Error
+
+You are probably aware that GPS fixes locate the receiver in 3D space, and thus produce an elevation as well as coordinates. You are probably also aware that the vertical accuracy isn't as good as the horizontal. We can use this to find more bad fixes that might still have a relatively low HDOP. If the point is good, the gps elevation should roughly agree with an external source, known as a Digital Elevation Model (DEM). 
+
+DEM files are very large, and the automated services to request DEM at specific points are quite slow for large datasets. So these filters rely on downloading external data not included in the package. There are many different DEM sources globally, but for this example we'll use the USGS 1/3 Arc Second DEM. In this example all
+of our points are covered in one GeoTIFF. This GeoTIFF is converted into a `stars` object. If you have multiple files, they can be converted to a single `stars`, but that is outside of our scope. Please see [stars](https://r-spatial.github.io/stars/)
+
+```{r eval=FALSE, message=FALSE, warning=FALSE}
+# Downloading a GeoTIFF for our area:
+dem_url = "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n38w120/USGS_13_n38w120_20210701.tif"
+download.file(dem_url, "myDem.tif", method = "wget")
+```
+
+
+Now that we've downloaded a DEM file, we can use `get_elevation_dem` to add a DEM elevation column to our fixes, or `get_elevation_difference` to directly add a column for the difference between the gps and dem elevations. 
+Let's take a look at the DEM elevation versus the GPS elevation:
+
+```{r fig.width=7, message=FALSE, warning=FALSE}
+fixes_w_displacement %>%
+  get_elevation_dem(dem_src = "myDem.tif") %>%
+  ggplot(aes(x = elevation_dem, y = elevation_gps)) +
+  geom_point(aes(color = sqrt(as.numeric(disp)))) +
+  labs(color = "Root Displacement (m^0.5)") +
+  scale_color_viridis_c()
+```
+
+Here you can see that most of the time, these are pretty similar. Especially for low displacement points. But there are lots of points that differ by quite a bit. Something is fishy with these ones. 
+
+Let's take a look versus displacement again:
+
+```{r fig.width=7, message=FALSE, warning=FALSE}
+fixes_w_displacement %>% 
+  get_elevation_difference(dem_src = "myDem.tif",
+                           elev_field = elevation_gps) %>% 
+  mutate(disp = as.numeric(disp)) %>% 
+  ggplot(aes(x = disp, y = elevation_dif)) +
+  scale_x_log10() +
+  geom_point(alpha = 0.5) 
+```
+
+In this case, I'm not entirely sure what a good cutoff is, but let's pick something and take a look at the points, this time filtering both HDOP and elevation difference:
+
+```{r fig.height=6, fig.width=7, message=FALSE, warning=FALSE}
+get_animal_fixes(dsn) %>% 
+  dplyr::filter(hdop < 100) %>% 
+  get_elevation_difference(dem_src = "myDem.tif", elev_field = elevation_gps) %>% 
+  dplyr::filter(abs(elevation_dif) < 300) %>% 
+  mapview(zcol = "animal_id")
+```
+
+
+This is starting to look more like real data.
+
+### More filters to come!

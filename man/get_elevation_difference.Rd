@@ -8,7 +8,8 @@ get_elevation_difference(
   df,
   dem_src,
   elev_field = elevation_gps,
-  geom_field = geom
+  geom_field = geom,
+  abs = TRUE
 )
 }
 \arguments{
@@ -20,6 +21,8 @@ be a raster file, usually a .tif}
 \item{elev_field}{Existing elevation column in `df`}
 
 \item{geom_field}{name of geometry column in df}
+
+\item{abs}{If true, use absolute difference}
 }
 \description{
 Get difference between DEM raster and elevation column in an sfc
