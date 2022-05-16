@@ -165,7 +165,7 @@ get_elevation_dem <- function(df,
 #' be a raster file, usually a .tif
 #' @param elev_field Existing elevation column in `df`
 #' @param geom_field name of geometry column in df
-#'
+#' @param abs If true, use absolute difference
 #' @importFrom dplyr mutate
 #' @importFrom stars read_stars st_extract
 #' @importFrom sf st_read st_coordinates st_transform st_crs
@@ -173,10 +173,21 @@ get_elevation_dem <- function(df,
 get_elevation_difference <- function(df,
                                      dem_src,
                                      elev_field = elevation_gps,
-                                     geom_field = geom) {
+                                     geom_field = geom,
+                                     abs = TRUE) {
   elev_field = enquo(elev_field)
 
   df %>%
     get_elevation_dem(dem_src = dem_src) %>%
-    dplyr::mutate(elevation_dif = !!elev_field - elevation_dem)
+    dplyr::mutate(elevation_dif = !!elev_field - elevation_dem) ->
+    df
+
+  if(abs) {
+    df %>%
+      mutate(elevation_df = abs(elevation_dif)) ->
+      df
+  }
+
+  return(df)
+
 }
