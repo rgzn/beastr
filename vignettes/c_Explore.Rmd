@@ -17,3 +17,22 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(beastr)
 ```
+# UNDER CONSTRUCTION
+
+## Motivation
+
+Now that you've compiled your data into the centralized geopackage, you may wonder: "Why did I go through all that trouble?"
+
+The goal of this article is to provide examples of data visualization and analysis using this package. The standardized database will make access more consistent, and your analyses easier to replicate, especially as you add new data and sensor deployments.
+
+That said, let's proceed with examples:
+
+## Maps
+
+## Movement 
+
+## Habitat
+
+## Activity
+
+
