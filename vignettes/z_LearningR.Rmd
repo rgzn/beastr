@@ -176,6 +176,10 @@ It's basically an in-depth demo using the `sf` package.
 It illustrates how to use `ggplot` in combination with spatial data, and also 
 explains what goes into making data spatial. 
 
+__GIS and mapping in R__
+https://oliviergimenez.github.io/intro_spatialR/#1
+
+Nice slides with lots of examples from gps telemetry on how to use `sf`.
 
 For raster data, the corresponding package is `stars`:
 
